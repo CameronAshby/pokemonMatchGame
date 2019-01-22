@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from 'angularfire2/firestore';
+import {LoginServiceService} from '../../services/auth/login-service.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -7,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfilePageComponent implements OnInit {
 
-  constructor() { }
+  constructor(private afs: AngularFirestore, private loginService: LoginServiceService) { }
 
   ngOnInit() {
   }
