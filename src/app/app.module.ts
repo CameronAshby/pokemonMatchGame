@@ -23,13 +23,15 @@ import {
 import {FormsModule} from '@angular/forms';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
+import { StatspageComponent } from './statspage/statspage.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfilePageComponent,
     WelcomePageComponent,
-    SignUpComponent
+    SignUpComponent,
+    StatspageComponent
   ],
   imports: [
     BrowserModule,
