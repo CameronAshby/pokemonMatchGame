@@ -1,1 +1,11 @@
-<div *ngFor="let player of players | async; let i = index">{{player[i].gamesLost}}</div>
+
+<mat-card>
+  <div>{{playerName}} Stats</div>
+  <div>Games Won: {{playerInfo.gamesWon}}</div>
+  <div>Games Lost: {{playerInfo.gamesLost}}</div>
+  <div>Games Played: {{playerInfo.gamesPlayed}}</div>
+  <div>Players Beaten: {{playerInfo.playersBeaten}}</div>
+  <div>Players Lost To: {{playerInfo.playersLostTo}}</div>
+  <div>Score: {{playerInfo.score}}</div>
+</mat-card>
+

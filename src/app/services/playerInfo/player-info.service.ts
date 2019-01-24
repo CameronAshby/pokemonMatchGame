@@ -2,26 +2,20 @@ import { Injectable } from '@angular/core';
 import {Player} from '../../player';
 import {Observable} from 'rxjs';
 
-<<<<<<< HEAD
 import {
   AngularFirestoreCollection,
   DocumentChangeAction,
   AngularFirestore
 } from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
-=======
-import { AngularFirestore } from 'angularfire2/firestore';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 
 
->>>>>>> bd0f28e265f22eb6022f4dac5b8d4b648ded184e
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerInfoService {
   private playerRef: AngularFirestoreCollection<Player>;
-
-<<<<<<< HEAD
   constructor(private af: AngularFirestore) {
     this.playerRef = this.af.collection<Player>(`players`);
   }
@@ -42,11 +36,8 @@ export class PlayerInfoService {
           });
         })
       );
-=======
-  constructor(private af: AngularFirestore) { }
-
-  dataTarget() {
+  }
+  dataTarget(){
     return this.af.collection('players').doc('player1');
->>>>>>> bd0f28e265f22eb6022f4dac5b8d4b648ded184e
   }
 }
