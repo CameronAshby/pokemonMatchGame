@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
-import { Player } from '../player';
-import {Observable} from 'rxjs';
+import { Player } from '../interfaces/player';
 import {LoginServiceService} from '../services/auth/login-service.service';
 
 @Component({
@@ -11,16 +10,16 @@ import {LoginServiceService} from '../services/auth/login-service.service';
 })
 export class StatspageComponent implements OnInit {
 
-  playerInfo: any;
+  playerInfo: Player;
 
   constructor(private afs: AngularFirestore, private loginService: LoginServiceService) { }
 
   ngOnInit() {
-    this.afs.collection('players').get().subscribe(documents => {
-      documents.forEach(doc => {
-        console.log(doc.data());
-        this.playerInfo = doc.data();
-      });
-    });
+    console.log(this.loginService.playerName);
+    this.afs.collection('players').doc(this.loginService.playerName + '').get().subscribe(doc => {
+      console.log(doc.data());
+      this.playerInfo = doc.data() as Player;
+      console.log(this.playerInfo);
+    })
   }
 }
