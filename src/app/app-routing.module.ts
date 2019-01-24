@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ProfilePageComponent} from './players/profile-page/profile-page.component';
 import {WelcomePageComponent} from './welcome-page/welcome-page.component';
+import { StatspageComponent} from './statspage/statspage.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,11 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'welcomePage'
+    redirectTo: 'statsPage'
+  },
+  {
+    path: 'statsPage',
+    component: StatspageComponent
   },
 ];
 

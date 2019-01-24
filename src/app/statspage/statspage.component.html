@@ -1,3 +1,1 @@
-<p>
-  statspage works!
-</p>
+<div *ngFor="let player of players | async; let i = index">{{player[i].gamesLost}}</div>
