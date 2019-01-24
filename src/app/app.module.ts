@@ -10,7 +10,6 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ProfilePageComponent } from './players/profile-page/profile-page.component';
 import {
   MatButtonModule,
   MatCardModule, MatCheckboxModule,
@@ -30,7 +29,6 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
 @NgModule({
   declarations: [
     AppComponent,
-    ProfilePageComponent,
     WelcomePageComponent,
     SignUpComponent,
     StatspageComponent,

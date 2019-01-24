@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {ProfilePageComponent} from './players/profile-page/profile-page.component';
 import {WelcomePageComponent} from './welcome-page/welcome-page.component';
 import { StatspageComponent} from './statspage/statspage.component';
 import {SetupPageComponent} from './setup-page/setup-page.component';
@@ -20,10 +19,6 @@ const routes: Routes = [
   {
     path: 'setupPage',
     component: SetupPageComponent
-  },
-  {
-    path: 'playerProfile',
-    component: ProfilePageComponent
   },
   {
     path: 'statsPage',
