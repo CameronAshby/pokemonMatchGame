@@ -20,6 +20,6 @@ export class StatspageComponent implements OnInit {
     documents.forEach(doc => {
       console.log(doc.data());
     });
-  });
-
-}}
+    });
+  }
+}
