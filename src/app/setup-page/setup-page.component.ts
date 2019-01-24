@@ -11,14 +11,14 @@ export class SetupPageComponent implements OnInit {
   constructor(private infoService: PlayerInfoService, private loginService: LoginServiceService) { }
 
   ngOnInit() {
-    this.infoService.dataTarget().get()
-      .subscribe(doc => {
-      if (!doc.exists) {
-        console.log('No such document!');
-      } else {
-        console.log('Document data:', doc.data());
-      }
-    });
+  //   this.infoService.dataTarget().get()
+  //     .subscribe(doc => {
+  //     if (!doc.exists) {
+  //       console.log('No such document!');
+  //     } else {
+  //       console.log('Document data:', doc.data());
+  //     }
+  //   });
   }
 
 }

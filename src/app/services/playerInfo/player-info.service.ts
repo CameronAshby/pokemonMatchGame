@@ -45,6 +45,6 @@ export class PlayerInfoService {
 
   saveToFirebase(playerName: string, playerInfo: Player) {
     // this.playerRef.add(playerInfo);
-    this.afs.collection(`players`).add(playerInfo);
+    this.afs.collection(`players`).doc(playerName).set(playerInfo);
   }
 }
