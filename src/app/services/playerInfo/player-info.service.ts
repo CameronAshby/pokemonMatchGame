@@ -8,16 +8,17 @@ import {
   AngularFirestore
 } from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerInfoService {
   private playerRef: AngularFirestoreCollection<Player>;
-  constructor(private af: AngularFirestore) {
-    this.playerRef = this.af.collection<Player>(`players`);
+  private playerCollectionRef: AngularFirestoreCollection<Player[]>;
+
+  constructor(private afs: AngularFirestore) {
+    this.playerRef = this.afs.collection<Player>(`players`);
+    this.playerCollectionRef = this.afs.collection<Player[]>(`players`);
   }
 
   getPlayerObservable(): Observable<Player[]> {
@@ -37,7 +38,13 @@ export class PlayerInfoService {
         })
       );
   }
-  dataTarget(){
-    return this.af.collection('players').doc('player1');
+  
+  dataTarget() {
+    return this.afs.collection('players').doc('player1');
+  }
+
+  saveToFirebase(playerName: string, playerInfo: Player) {
+    // this.playerRef.add(playerInfo);
+    this.afs.collection(`players`).add(playerInfo);
   }
 }
