@@ -26,13 +26,13 @@ const routes: Routes = [
     component: ProfilePageComponent
   },
   {
-    path: '**',
-    redirectTo: 'welcomePage/signIn'
-  },
-  {
     path: 'statsPage',
     component: StatspageComponent
   },
+  {
+    path: '**',
+    redirectTo: 'welcomePage/signIn'
+  }
 ];
 
 @NgModule({

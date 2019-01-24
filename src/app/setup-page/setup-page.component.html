@@ -1,3 +1,29 @@
-<p>
-  setup-page works!
-</p>
+<mat-card>
+  <mat-card-content>
+    <div>
+      Player Name: {{loginService.playerName}}
+    </div>
+    <div>
+      <mat-select>
+        <mat-option value=1>1</mat-option>
+        <mat-option value=2>2</mat-option>
+        <mat-option value=3>3</mat-option>
+        <mat-option value=4>4</mat-option>
+      </mat-select>
+    </div>
+    <div>
+      Select Other Players
+    </div>
+    <div>
+      Number of Matches To Be Found
+    </div>
+  </mat-card-content>
+  <button mat-raised-button color="primary" (click)="infoService.saveToFirebase(loginService.playerName, {
+  gamesLost: 0,
+  gamesPlayed: 0,
+  gamesWon: 0,
+  playersBeaten: 'testName',
+  playersLostTo: 'testPerson',
+  score: 0
+  })">Save Game</button>
+</mat-card>

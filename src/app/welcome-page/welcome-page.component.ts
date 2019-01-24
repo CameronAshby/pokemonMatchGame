@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginServiceService} from '../services/auth/login-service.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-welcome-page',
@@ -8,10 +9,17 @@ import {LoginServiceService} from '../services/auth/login-service.service';
 })
 export class WelcomePageComponent implements OnInit {
 
-  constructor(private loginService: LoginServiceService) {
+  constructor(private loginService: LoginServiceService, private router: Router) {
   }
 
   ngOnInit() {
   }
 
+  newGame() {
+    this.router.navigate(['setupPage']);
+  }
+
+  viewProfile() {
+    this.router.navigate(['statsPage']);
+  }
 }
