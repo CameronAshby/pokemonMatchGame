@@ -38,7 +38,7 @@ export class PlayerInfoService {
         })
       );
   }
-
+  
   dataTarget() {
     return this.afs.collection('players').doc('player1');
   }

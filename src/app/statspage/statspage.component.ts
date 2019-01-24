@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Player } from '../player';
 import {Observable} from 'rxjs';
-import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 
 @Component({
   selector: 'app-statspage',
@@ -11,15 +10,16 @@ import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 })
 export class StatspageComponent implements OnInit {
 
-  player: Observable<Player[]>;
+  playerInfo: any;
 
   constructor(private afs: AngularFirestore) { }
 
   ngOnInit() {
     this.afs.collection('players').get().subscribe(documents => {
-    documents.forEach(doc => {
-      console.log(doc.data());
-    });
+      documents.forEach(doc => {
+        console.log(doc.data());
+        this.playerInfo = doc.data();
+      });
     });
   }
 }
