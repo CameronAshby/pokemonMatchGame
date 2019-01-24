@@ -1,6 +1,6 @@
 import { APIKeys } from '../api-keys';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore'
+import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 const firebaseConfig = APIKeys.firebaseConfig;
 
@@ -24,6 +24,8 @@ import {FormsModule} from '@angular/forms';
 import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { StatspageComponent } from './statspage/statspage.component';
+import { SetupPageComponent } from './setup-page/setup-page.component';
+
 
 @NgModule({
   declarations: [
@@ -32,6 +34,7 @@ import { StatspageComponent } from './statspage/statspage.component';
     WelcomePageComponent,
     SignUpComponent,
     StatspageComponent
+    SetupPageComponent
   ],
   imports: [
     BrowserModule,

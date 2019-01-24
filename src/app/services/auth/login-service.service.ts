@@ -7,6 +7,9 @@ import { auth } from 'firebase/app';
 })
 export class LoginServiceService {
 
+  loggedIn: boolean = false;
+  playerName: string = '';
+
   constructor(public afAuth: AngularFireAuth) { }
 
   signInPopupGoogle() {

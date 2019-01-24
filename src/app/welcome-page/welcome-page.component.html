@@ -1,3 +1,12 @@
-<button mat-raised-button (click)="loginWithGoogle()">Sign In</button>
-<button mat-raised-button (click)="signOut()">Sign Out</button>
-<div>{{playerDisplayName}}</div>
+<div class="welcomePageContainer">
+  <mat-card>
+    <mat-card-title>Welcome to Pokemon Matching {{loginService.playerName}} <button *ngIf="loginService.playerName" mat-raised-button>Sign Out</button></mat-card-title>
+    <mat-card-content *ngIf="loginService.playerName">
+      <button mat-raised-button>Play New Game</button>
+      <button mat-raised-button>View Stats</button>
+    </mat-card-content>
+  </mat-card>
+
+  <router-outlet></router-outlet>
+
+</div>
