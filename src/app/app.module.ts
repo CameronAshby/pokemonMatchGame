@@ -33,7 +33,7 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
     ProfilePageComponent,
     WelcomePageComponent,
     SignUpComponent,
-    StatspageComponent
+    StatspageComponent,
     SetupPageComponent
   ],
   imports: [
