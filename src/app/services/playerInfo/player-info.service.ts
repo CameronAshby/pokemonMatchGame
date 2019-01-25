@@ -13,6 +13,9 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class PlayerInfoService {
+
+  playerInfo: Player;
+
   private playerRef: AngularFirestoreCollection<Player>;
   private playerCollectionRef: AngularFirestoreCollection<Player[]>;
 

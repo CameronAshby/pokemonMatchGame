@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
 import { Player } from '../interfaces/player';
 import {LoginServiceService} from '../services/auth/login-service.service';
+import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 
 @Component({
   selector: 'app-statspage',
@@ -10,16 +11,11 @@ import {LoginServiceService} from '../services/auth/login-service.service';
 })
 export class StatspageComponent implements OnInit {
 
-  playerInfo: Player;
+  constructor(private afs: AngularFirestore, private loginService: LoginServiceService, private playerInfoService: PlayerInfoService) {}
 
-  constructor(private afs: AngularFirestore, private loginService: LoginServiceService) { }
-
-  ngOnInit() {
-    console.log(this.loginService.playerName);
-    this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
-      console.log(doc.data());
-      this.playerInfo = doc.data() as Player;
-      console.log(this.playerInfo);
+  async ngOnInit() {
+    await this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
+      this.playerInfoService.playerInfo = doc.data() as Player;
     })
   }
 }
