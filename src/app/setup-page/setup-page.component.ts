@@ -11,7 +11,7 @@ import {AngularFirestore} from 'angularfire2/firestore'
 })
 export class SetupPageComponent implements OnInit {
 
-  previousPlayers: any;
+  previousPlayers: Player[] = [];
 
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
@@ -23,9 +23,10 @@ export class SetupPageComponent implements OnInit {
       private playerInfoService: PlayerInfoService,
       private afs: AngularFirestore
   ) {
-    this.previousPlayers = afs.collection('players').get().subscribe(documents => {
+    afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
         console.log(doc.data());
+        this.previousPlayers.push(doc.data() as Player);
       })
     })
   }
@@ -33,17 +34,7 @@ export class SetupPageComponent implements OnInit {
   ngOnInit() {
   }
 
-  saveToFirebase() {
-    if(!this.playerInfo) {
-      this.playerInfoService.saveToFirebase(this.loginService.playerName, {
-        name: this.playerInfoService.playerInfo.name,
-        gamesLost: 0,
-        gamesPlayed: 0,
-        gamesWon: 0,
-        playersBeaten: [],
-        playersLostTo: [],
-        score: 0
-      })
-    }
+  saveGameToFirebase() {
+    this.playerInfoService.saveGameToFirebase();
   }
 }
