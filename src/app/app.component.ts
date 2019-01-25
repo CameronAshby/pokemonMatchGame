@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {LoginServiceService} from './services/auth/login-service.service';
+import {Router} from '@angular/router';
+
 
 @Component({
   selector: 'app-root',
@@ -7,9 +9,12 @@ import {LoginServiceService} from './services/auth/login-service.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-
-  constructor(private loginService: LoginServiceService) {
+  constructor(private loginService: LoginServiceService, private router: Router) {
 
   }
   title = 'Project5-PokemonMatchGame';
+
+  homePage() {
+    this.router.navigate(['welcomePage/signIn']);
+  }
 }

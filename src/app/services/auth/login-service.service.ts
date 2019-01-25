@@ -13,7 +13,7 @@ export class LoginServiceService {
   constructor(public afAuth: AngularFireAuth) { }
 
   signInPopupGoogle() {
-    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
+    return this.afAuth.auth.signInWithPopup(new auth.GoogleAuthProvider());
     // Complete Promise to get necessary values after signing in
   }
 
