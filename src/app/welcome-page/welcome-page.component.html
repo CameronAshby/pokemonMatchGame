@@ -1,6 +1,5 @@
 <div class="welcomePageContainer">
   <mat-card>
-  <router-outlet></router-outlet>
     <mat-card-title>Welcome to Pokemon Matching {{loginService.playerName}} <button *ngIf="loginService.playerName" mat-raised-button>Sign Out</button></mat-card-title>
     <mat-card-content *ngIf="loginService.playerName">
       <button mat-raised-button (click)="newGame()">Play New Game</button>

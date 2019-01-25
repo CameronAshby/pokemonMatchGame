@@ -8,6 +8,7 @@ import {Router} from '@angular/router';
   styleUrls: ['./welcome-page.component.scss']
 })
 export class WelcomePageComponent implements OnInit {
+
   constructor(private loginService: LoginServiceService, private router: Router) {
   }
 
