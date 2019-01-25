@@ -14,12 +14,12 @@
     <div>
       <p>Select Other Players</p>
       <mat-select>
-        <mat-option></mat-option>
+        <mat-option *ngFor="let player of previousPlayers">{{player.name}}</mat-option>
       </mat-select>
     </div>
     <div>
       Number of Matches To Be Found
     </div>
   </mat-card-content>
-  <button mat-raised-button color="primary" (click)="saveToFirebase()">Save Game</button>
+  <button mat-raised-button color="primary" (click)="saveGameToFirebase()">Save Game</button>
 </mat-card>

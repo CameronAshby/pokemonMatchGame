@@ -14,7 +14,8 @@ export class WelcomePageComponent implements OnInit {
 
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
-      this.playerInfoService.playerInfo = doc.data() as Player;})
+      this.playerInfoService.playerInfo = doc.data() as Player;
+    });
   }
 
   constructor(
@@ -36,15 +37,27 @@ export class WelcomePageComponent implements OnInit {
   }
 
   saveToFirebase() {
-    if(!this.playerInfo) {
+    console.log(this.playerInfoService.playerInfo);
+    if(!this.playerInfoService.playerInfo) {
       this.playerInfoService.saveToFirebase(this.loginService.playerName, {
-        name: this.playerInfoService.playerInfo.name,
+        name: this.loginService.playerName,
         gamesLost: 0,
         gamesPlayed: 0,
         gamesWon: 0,
         playersBeaten: [],
         playersLostTo: [],
         score: 0
+      })
+    }
+    else {
+      this.playerInfoService.saveToFirebase(this.loginService.playerName, {
+        name: this.loginService.playerName,
+        gamesLost: this.playerInfoService.playerInfo.gamesLost,
+        gamesPlayed: this.playerInfoService.playerInfo.gamesPlayed,
+        gamesWon: this.playerInfoService.playerInfo.gamesWon,
+        playersBeaten: this.playerInfoService.playerInfo.playersBeaten,
+        playersLostTo: this.playerInfoService.playerInfo.playersLostTo,
+        score: this.playerInfoService.playerInfo.score
       })
     }
   }

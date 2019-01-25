@@ -17,10 +17,10 @@ export class PlayerInfoService {
 
   playerInfo: Player;
   gameInfo: Game = {
-    playerCount: undefined,
-    players: undefined,
-    playerScores: undefined,
-    matchesCount: undefined
+    playerCount: 0,
+    players: [],
+    playerScores: [],
+    matchesCount: 0
   };
 
   private playerRef: AngularFirestoreCollection<Player>;
@@ -55,5 +55,9 @@ export class PlayerInfoService {
 
   saveToFirebase(playerName: string, playerInfo: Player) {
     this.afs.collection(`players`).doc(playerName).set(playerInfo);
+  }
+
+  saveGameToFirebase() {
+    this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
   }
 }
