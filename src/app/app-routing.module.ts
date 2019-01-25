@@ -3,18 +3,11 @@ import { Routes, RouterModule } from '@angular/router';
 import {WelcomePageComponent} from './welcome-page/welcome-page.component';
 import { StatspageComponent} from './statspage/statspage.component';
 import {SetupPageComponent} from './setup-page/setup-page.component';
-import {SignUpComponent} from './sign-up/sign-up.component';
 
 const routes: Routes = [
   {
     path: 'welcomePage',
-    component: WelcomePageComponent,
-    children: [
-      {
-        path: 'signIn',
-        component: SignUpComponent
-      }
-    ]
+    component: WelcomePageComponent
   },
   {
     path: 'setupPage',
@@ -26,7 +19,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'welcomePage/signIn'
+    redirectTo: 'welcomePage'
   }
 ];
 
