@@ -24,6 +24,9 @@ import { WelcomePageComponent } from './welcome-page/welcome-page.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { StatspageComponent } from './statspage/statspage.component';
 import { SetupPageComponent } from './setup-page/setup-page.component';
+import {HttpClientModule} from '@angular/common/http';
+import { GamepageComponent } from './gamepage/gamepage.component';
+import {PokemonTCG} from "pokemon-tcg-sdk-typescript";
 
 
 @NgModule({
@@ -32,7 +35,8 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
     WelcomePageComponent,
     SignUpComponent,
     StatspageComponent,
-    SetupPageComponent
+    SetupPageComponent,
+    GamepageComponent
   ],
   imports: [
     BrowserModule,
@@ -40,6 +44,8 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
     AngularFirestoreModule, AngularFireAuthModule,
     AppRoutingModule,
     BrowserAnimationsModule,
+    BrowserModule,
+    HttpClientModule,
     MatToolbarModule,
     MatCardModule,
     MatFormFieldModule,
@@ -51,7 +57,7 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
     MatCheckboxModule,
     MatExpansionModule,
     MatSelectModule,
-    MatTableModule
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
