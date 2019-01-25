@@ -6,5 +6,5 @@
       <button mat-raised-button (click)="viewProfile()">View Stats</button>
     </mat-card-content>
   </mat-card>
-  <app-sign-up></app-sign-up>
+  <app-sign-up *ngIf="!loginService.loggedIn"></app-sign-up>
 </div>

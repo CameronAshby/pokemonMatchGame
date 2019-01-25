@@ -16,7 +16,7 @@ export class StatspageComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.loginService.playerName);
-    this.afs.collection('players').doc(this.loginService.playerName + '').get().subscribe(doc => {
+    this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
       console.log(doc.data());
       this.playerInfo = doc.data() as Player;
       console.log(this.playerInfo);
