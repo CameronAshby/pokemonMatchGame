@@ -11,9 +11,22 @@ import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 export class GamepageComponent implements OnInit {
 
   cardsArray: Card[] = [];
+  randomCard: Card;
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
     for(let i = 0; i < playerInfoService.gameInfo.matchesCount; i++) {
+
+      let pokemonChoice = this.getRandomCard();
+      console.log(pokemonChoice);
+
+      // this.randomCard = {
+      //   cardId: this.pokemonservice.pokemonArray[pokemonChoice].id + '',
+      //   image: this.pokemonservice.pokemonArray[pokemonChoice].imageUrl,
+      //   matchId: i+1
+      // };
+
+      console.log(this.randomCard);
+
       this.cardsArray[i] = {
         cardId: '',
         image: '',
@@ -31,7 +44,10 @@ export class GamepageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pokemonservice.getPokemon();
+     // this.pokemonservice.getPokemon();
   }
 
+  getRandomCard() {
+    return Math.floor((Math.random() * 999));
+  }
 }
