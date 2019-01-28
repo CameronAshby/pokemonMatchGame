@@ -26,7 +26,6 @@ export class SignUpComponent implements OnInit {
     this.loginService.signInPopupGoogle()
       .then(data => {
         this.loginService.playerName = data.user.displayName;
-        console.log(data);
         this.loginService.loggedIn = true;
       });
   }

@@ -3,6 +3,8 @@ import { PlayerInfoService } from '../services/playerInfo/player-info.service';
 import {LoginServiceService} from '../services/auth/login-service.service';
 import {Player} from '../interfaces/player';
 import {AngularFirestore} from 'angularfire2/firestore'
+import {Router} from '@angular/router';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-setup-page',
@@ -12,23 +14,28 @@ import {AngularFirestore} from 'angularfire2/firestore'
 export class SetupPageComponent implements OnInit {
 
   previousPlayers: Player[] = [];
+  smallMatches: number;
+  mediumMatches: number;
+  largeMatches: number;
+  players = new FormControl();
 
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
-      this.playerInfoService.playerInfo = doc.data() as Player;})
+      this.playerInfoService.playerInfo = doc.data() as Player;
+    })
   };
 
   constructor(
       private loginService: LoginServiceService,
       private playerInfoService: PlayerInfoService,
-      private afs: AngularFirestore
+      private afs: AngularFirestore,
+      private router: Router
   ) {
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
-        console.log(doc.data());
         this.previousPlayers.push(doc.data() as Player);
       })
-    })
+    });
   }
 
   ngOnInit() {
@@ -36,5 +43,19 @@ export class SetupPageComponent implements OnInit {
 
   saveGameToFirebase() {
     this.playerInfoService.saveGameToFirebase();
+  }
+
+  gameStart() {
+    this.router.navigate(['gamePage'])
+  }
+
+  buildMatches() {
+    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 3;
+    this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 5;
+    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 7;
+
+    for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
+      this.playerInfoService.gameInfo.playerScores[i] = 0;
+    }
   }
 }

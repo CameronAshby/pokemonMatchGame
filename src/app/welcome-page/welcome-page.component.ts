@@ -37,7 +37,6 @@ export class WelcomePageComponent implements OnInit {
   }
 
   saveToFirebase() {
-    console.log(this.playerInfoService.playerInfo);
     if(!this.playerInfoService.playerInfo) {
       this.playerInfoService.saveToFirebase(this.loginService.playerName, {
         name: this.loginService.playerName,

@@ -19,7 +19,7 @@ const routes: Routes = [
     component: StatspageComponent
   },
   {
-    path: 'gamepage',
+    path: 'gamePage',
     component: GamepageComponent
   },
   {
