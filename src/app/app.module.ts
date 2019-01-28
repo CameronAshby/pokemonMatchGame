@@ -36,7 +36,7 @@ import {PokemonTCG} from "pokemon-tcg-sdk-typescript";
     SignUpComponent,
     StatspageComponent,
     SetupPageComponent,
-    GamepageComponent
+    GamepageComponent,
   ],
   imports: [
     BrowserModule,
