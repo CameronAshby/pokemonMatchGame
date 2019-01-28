@@ -4,25 +4,27 @@
       Player Name: {{loginService.playerName}}
     </div>
     <div>
-      <mat-select [(ngModel)]="playerInfoService.gameInfo.playerCount" (selectionChange)="buildMatches()">
+      <mat-select placeholder="Select Amount of Players" [(ngModel)]="playerInfoService.gameInfo.playerCount" (selectionChange)="buildMatches()">
         <mat-option value=1>1</mat-option>
         <mat-option value=2>2</mat-option>
         <mat-option value=3>3</mat-option>
         <mat-option value=4>4</mat-option>
       </mat-select>
     </div>
-    <div>
+    <div *ngIf="playerInfoService.gameInfo.playerCount">
       <p>Select Other Players</p>
-      <mat-select>
-        <mat-option *ngFor="let player of previousPlayers">{{player.name}}</mat-option>
-      </mat-select>
+      <mat-form-field>
+        <mat-select placeholder="Select Other Players" [formControl]="players" multiple [(ngModel)]="playerInfoService.gameInfo.players">
+          <mat-option *ngFor="let player of previousPlayers" [value]="player.name">{{player.name}}</mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
-    <div>
+    <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.playerScores">
       Number of Matches To Be Found
-      <mat-select [(ngModel)]="playerInfoService.gameInfo.matchesCount">
-        <mat-option [value]="smallMatches">{{smallMatches}}</mat-option>
-        <mat-option [value]="mediumMatches">{{mediumMatches}}</mat-option>
-        <mat-option [value]="largeMatches">{{largeMatches}}</mat-option>
+      <mat-select placeholder="Select Amount of Matches" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
+        <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
+        <mat-option [value]="mediumMatches">Medium: {{mediumMatches}}</mat-option>
+        <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
       </mat-select>
     </div>
   </mat-card-content>
