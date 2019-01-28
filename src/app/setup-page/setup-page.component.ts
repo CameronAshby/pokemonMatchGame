@@ -5,6 +5,7 @@ import {Player} from '../interfaces/player';
 import {AngularFirestore} from 'angularfire2/firestore'
 import {Router} from '@angular/router';
 import {FormControl} from '@angular/forms';
+import {PokemonService} from '../services/apiService/apistuff.service';
 
 @Component({
   selector: 'app-setup-page',
@@ -29,7 +30,8 @@ export class SetupPageComponent implements OnInit {
       private loginService: LoginServiceService,
       private playerInfoService: PlayerInfoService,
       private afs: AngularFirestore,
-      private router: Router
+      private router: Router,
+      private pokemonService: PokemonService
   ) {
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
@@ -45,8 +47,9 @@ export class SetupPageComponent implements OnInit {
     this.playerInfoService.saveGameToFirebase();
   }
 
-  gameStart() {
-    this.router.navigate(['gamePage'])
+  async gameStart() {
+    await this.pokemonService.getPokemon();
+    this.router.navigate(['gamePage']);
   }
 
   buildMatches() {
