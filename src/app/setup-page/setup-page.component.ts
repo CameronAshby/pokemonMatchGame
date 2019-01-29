@@ -36,7 +36,7 @@ export class SetupPageComponent implements OnInit {
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
         this.previousPlayers.push(doc.data() as Player);
-      })
+      });
     });
   }
 
@@ -48,14 +48,14 @@ export class SetupPageComponent implements OnInit {
   }
 
   gameStart() {
-
+    this.pokemonService.getPokemon();
     this.router.navigate(['gamePage']);
   }
 
   buildMatches() {
-    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 3;
-    this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 5;
-    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 7;
+    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
+    this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 4;
+    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 6;
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;

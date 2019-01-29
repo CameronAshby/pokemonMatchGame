@@ -14,41 +14,30 @@ export class GamepageComponent implements OnInit {
   randomCard: Card;
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
-    this.pullApi();
-    for(let i = 0; i < playerInfoService.gameInfo.matchesCount; i++) {
+    this.pokemonservice.getPokemon()
+      .then(data => {
+          this.pokemonservice.pokemonArray = data;
+          for(let i = 0; i < this.playerInfoService.gameInfo.matchesCount; i++) {
+            this.cardsArray[i] = {
+              cardId: '',
+              image: '',
+              matchId: i + 1
+            };
+          }
 
-      let pokemonChoice = this.getRandomCard();
-      console.log(pokemonChoice);
-      console.log(pokemonservice.cardCount);
-      console.log(pokemonservice.pokemonArray.length);
-      this.randomCard = {
-        cardId: this.pokemonservice.pokemonArray[pokemonChoice] + '',
-        image: '',
-        matchId: i + 1
-      };
 
-      console.log(this.randomCard);
-      this.cardsArray[i] = {
-        cardId: '',
-        image: '',
-        matchId: i + 1
-      };
-    }
-    console.log(playerInfoService.gameInfo.matchesCount);
-    for (let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
-      console.log(i);
-      this.cardsArray[i] = {
-        cardId: '',
-        image: '',
-        matchId: this.cardsArray[i - playerInfoService.gameInfo.matchesCount].matchId
-      };
-    }
-
-    console.log(this.cardsArray);
+          for(let i = this.playerInfoService.gameInfo.matchesCount; i < this.pokemonservice.cardCount; i++) {
+            this.cardsArray[i] = {
+              cardId: '',
+              image: '',
+              matchId: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].matchId
+            }
+          }
+        }
+      );
   }
 
   ngOnInit() {
-     // this.pokemonservice.getPokemon();
   }
 
   async pullApi() {
