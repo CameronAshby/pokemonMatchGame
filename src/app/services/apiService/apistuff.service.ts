@@ -15,13 +15,7 @@ export class PokemonService {
   }
 
   getPokemon() {
-    PokemonTCG.Card.all()
-      .then(card => {
-        console.log(card);
-        this.pokemonArray = card;
-      })
-      .catch(error => {
-      });
+    return PokemonTCG.Card.all();
   }
 
   setCardCount() {

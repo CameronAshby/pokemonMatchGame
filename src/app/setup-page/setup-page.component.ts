@@ -47,15 +47,15 @@ export class SetupPageComponent implements OnInit {
     this.playerInfoService.saveGameToFirebase();
   }
 
-  async gameStart() {
-    await this.pokemonService.getPokemon();
+  gameStart() {
+    this.pokemonService.getPokemon();
     this.router.navigate(['gamePage']);
   }
 
   buildMatches() {
-    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 3;
-    this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 5;
-    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 7;
+    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
+    this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 4;
+    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 6;
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;
