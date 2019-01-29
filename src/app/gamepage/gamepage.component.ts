@@ -14,6 +14,7 @@ export class GamepageComponent implements OnInit {
   randomCard: Card;
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
+    console.log(this.pokemonservice.pokemonArray);
     for(let i = 0; i < playerInfoService.gameInfo.matchesCount; i++) {
       this.cardsArray[i] = {
         cardId: '',
@@ -23,7 +24,6 @@ export class GamepageComponent implements OnInit {
     }
     console.log(playerInfoService.gameInfo.matchesCount);
     for(let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
-      console.log(i);
       this.cardsArray[i] = {
         cardId: '',
         image: '',
