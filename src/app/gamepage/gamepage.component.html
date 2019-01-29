@@ -1,5 +1,7 @@
-<div *ngFor="let cards of cardsArray; let i = index">
-  <mat-card>
-    <img src="{{cards.image}}">
-  </mat-card>
+<div class="cardcontainer">
+  <div *ngFor="let cards of cardsArray; let i = index">
+    <mat-card class="cards">
+      <img src="{{cards.image}}"
+    </mat-card>
+  </div>
 </div>
