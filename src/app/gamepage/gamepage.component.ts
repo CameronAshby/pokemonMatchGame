@@ -15,32 +15,23 @@ export class GamepageComponent implements OnInit {
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
     for(let i = 0; i < playerInfoService.gameInfo.matchesCount; i++) {
-
-      let pokemonChoice = this.getRandomCard();
-      console.log(pokemonChoice);
-
-      // this.randomCard = {
-      //   cardId: this.pokemonservice.pokemonArray[pokemonChoice].id + '',
-      //   image: this.pokemonservice.pokemonArray[pokemonChoice].imageUrl,
-      //   matchId: i+1
-      // };
-
-      console.log(this.randomCard);
-
       this.cardsArray[i] = {
         cardId: '',
         image: '',
         matchId: i+1
       };
     }
-
+    console.log(playerInfoService.gameInfo.matchesCount);
     for(let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
+      console.log(i);
       this.cardsArray[i] = {
         cardId: '',
         image: '',
         matchId: this.cardsArray[i-playerInfoService.gameInfo.matchesCount].matchId
       }
     }
+
+    console.log(this.cardsArray);
   }
 
   ngOnInit() {

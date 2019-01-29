@@ -21,7 +21,7 @@
     </div>
     <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.playerScores">
       Number of Matches To Be Found
-      <mat-select placeholder="Select Amount of Matches" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
+      <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
         <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
         <mat-option [value]="mediumMatches">Medium: {{mediumMatches}}</mat-option>
         <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
