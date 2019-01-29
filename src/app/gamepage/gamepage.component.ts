@@ -45,6 +45,9 @@ export class GamepageComponent implements OnInit {
     }
   }
 
+  async pullApi() {
+    await this.pokemonservice.getPokemon();
+  }
   getRandomCard() {
     this.randomCardIndex = Math.floor((Math.random() * 999));
   }

@@ -23,8 +23,8 @@ export class SetupPageComponent implements OnInit {
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
       this.playerInfoService.playerInfo = doc.data() as Player;
-    })
-  };
+    });
+  }
 
   constructor(
       private loginService: LoginServiceService,
@@ -36,7 +36,7 @@ export class SetupPageComponent implements OnInit {
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
         this.previousPlayers.push(doc.data() as Player);
-      })
+      });
     });
   }
 

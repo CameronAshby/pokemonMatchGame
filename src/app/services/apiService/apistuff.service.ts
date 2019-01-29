@@ -13,11 +13,9 @@ export class PokemonService {
 
   constructor(private playerInfoService: PlayerInfoService) {
   }
-
   getPokemon() {
     return PokemonTCG.Card.all();
   }
-
   setCardCount() {
     this.cardCount = this.playerInfoService.gameInfo.matchesCount*2;
   }
