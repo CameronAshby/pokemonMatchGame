@@ -12,7 +12,6 @@ export class PokemonService {
   pokemonArray: Card[];
 
   constructor(private playerInfoService: PlayerInfoService) {
-    this.cardCount = playerInfoService.gameInfo.matchesCount*2;
   }
 
   getPokemon() {
@@ -23,5 +22,9 @@ export class PokemonService {
       })
       .catch(error => {
       });
+  }
+
+  setCardCount() {
+    this.cardCount = this.playerInfoService.gameInfo.matchesCount*2;
   }
 }
