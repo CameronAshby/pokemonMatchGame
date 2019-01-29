@@ -26,21 +26,23 @@ export class GamepageComponent implements OnInit {
       };
 
       console.log(this.randomCard);
-
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: i + 1
+        matchId: i+1
       };
     }
-
+    console.log(playerInfoService.gameInfo.matchesCount);
     for(let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
+      console.log(i);
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: this.cardsArray[i - playerInfoService.gameInfo.matchesCount].matchId
+        matchId: this.cardsArray[i-playerInfoService.gameInfo.matchesCount].matchId
       }
     }
+
+    console.log(this.cardsArray);
   }
 
   ngOnInit() {
