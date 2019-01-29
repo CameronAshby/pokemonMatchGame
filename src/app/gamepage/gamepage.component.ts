@@ -11,8 +11,9 @@ import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 export class GamepageComponent implements OnInit {
 
   cardsArray: Card[] = [];
-  randomCard: Card;
   randomCardIndex: number;
+
+
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
   }
@@ -32,7 +33,8 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i] = {
         cardId: this.pokemonservice.pokemonArray[this.randomCardIndex].id + '',
         image: this.pokemonservice.pokemonArray[this.randomCardIndex].imageUrl,
-        matchId: i+1
+        matchId: i+1,
+        clicked: false
       };
     }
 
@@ -40,7 +42,8 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i] = {
         cardId: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].cardId,
         image: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].image,
-        matchId: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].matchId
+        matchId: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].matchId,
+        clicked: false
       }
     }
   }
@@ -50,5 +53,9 @@ export class GamepageComponent implements OnInit {
   }
   getRandomCard() {
     this.randomCardIndex = Math.floor((Math.random() * 999));
+  }
+
+  toggleClicked(index: number) {
+    this.cardsArray[index].clicked = !this.cardsArray[index].clicked;
   }
 }
