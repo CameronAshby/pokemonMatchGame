@@ -24,7 +24,6 @@ export class GamepageComponent implements OnInit {
               matchId: i+1
             };
           }
-
           for(let i = this.playerInfoService.gameInfo.matchesCount; i < this.pokemonservice.cardCount; i++) {
             this.cardsArray[i] = {
               cardId: '',
