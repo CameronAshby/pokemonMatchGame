@@ -8,11 +8,21 @@ import {
   AngularFirestore
 } from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
+import {Game} from '../../interfaces/game';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlayerInfoService {
+
+  playerInfo: Player;
+  gameInfo: Game = {
+    playerCount: 0,
+    players: [],
+    playerScores: [],
+    matchesCount: 0
+  };
+
   private playerRef: AngularFirestoreCollection<Player>;
   private playerCollectionRef: AngularFirestoreCollection<Player[]>;
 
@@ -44,7 +54,10 @@ export class PlayerInfoService {
   }
 
   saveToFirebase(playerName: string, playerInfo: Player) {
-    // this.playerRef.add(playerInfo);
     this.afs.collection(`players`).doc(playerName).set(playerInfo);
+  }
+
+  saveGameToFirebase() {
+    this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
   }
 }

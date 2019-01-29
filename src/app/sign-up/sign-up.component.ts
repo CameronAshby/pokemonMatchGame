@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginServiceService} from '../services/auth/login-service.service';
 import {Router} from '@angular/router';
+import {PlayerInfoService} from '../services/playerInfo/player-info.service';
+import {AngularFirestore} from 'angularfire2/firestore';
+import {Player} from '../interfaces/player';
 
 @Component({
   selector: 'app-sign-up',
@@ -8,7 +11,13 @@ import {Router} from '@angular/router';
   styleUrls: ['./sign-up.component.scss']
 })
 export class SignUpComponent implements OnInit {
-  constructor(private loginService: LoginServiceService) { }
+
+  constructor(
+    private loginService: LoginServiceService,
+    private router: Router,
+    private playerInfoService: PlayerInfoService,
+    private afs: AngularFirestore
+  ) { }
 
   ngOnInit() {
   }
@@ -17,7 +26,6 @@ export class SignUpComponent implements OnInit {
     this.loginService.signInPopupGoogle()
       .then(data => {
         this.loginService.playerName = data.user.displayName;
-        console.log(data);
         this.loginService.loggedIn = true;
       });
   }
