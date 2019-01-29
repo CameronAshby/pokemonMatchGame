@@ -14,14 +14,16 @@ export class GamepageComponent implements OnInit {
   randomCard: Card;
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
+    this.pullApi();
     for(let i = 0; i < playerInfoService.gameInfo.matchesCount; i++) {
 
       let pokemonChoice = this.getRandomCard();
       console.log(pokemonChoice);
-
+      console.log(pokemonservice.cardCount);
+      console.log(pokemonservice.pokemonArray.length);
       this.randomCard = {
-        cardId: this.pokemonservice.pokemonArray[pokemonChoice].id + '',
-        image: this.pokemonservice.pokemonArray[pokemonChoice].imageUrl,
+        cardId: this.pokemonservice.pokemonArray[pokemonChoice] + '',
+        image: '',
         matchId: i + 1
       };
 
@@ -29,17 +31,17 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: i+1
+        matchId: i + 1
       };
     }
     console.log(playerInfoService.gameInfo.matchesCount);
-    for(let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
+    for (let i = playerInfoService.gameInfo.matchesCount; i < pokemonservice.cardCount; i++) {
       console.log(i);
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: this.cardsArray[i-playerInfoService.gameInfo.matchesCount].matchId
-      }
+        matchId: this.cardsArray[i - playerInfoService.gameInfo.matchesCount].matchId
+      };
     }
 
     console.log(this.cardsArray);
@@ -49,6 +51,9 @@ export class GamepageComponent implements OnInit {
      // this.pokemonservice.getPokemon();
   }
 
+  async pullApi() {
+    await this.pokemonservice.getPokemon();
+  }
   getRandomCard() {
     return Math.floor((Math.random() * 999));
   }

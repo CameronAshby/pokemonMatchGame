@@ -23,8 +23,8 @@ export class SetupPageComponent implements OnInit {
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
       this.playerInfoService.playerInfo = doc.data() as Player;
-    })
-  };
+    });
+  }
 
   constructor(
       private loginService: LoginServiceService,
@@ -47,8 +47,8 @@ export class SetupPageComponent implements OnInit {
     this.playerInfoService.saveGameToFirebase();
   }
 
-  async gameStart() {
-    await this.pokemonService.getPokemon();
+  gameStart() {
+
     this.router.navigate(['gamePage']);
   }
 
