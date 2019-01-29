@@ -19,18 +19,18 @@ export class GamepageComponent implements OnInit {
       let pokemonChoice = this.getRandomCard();
       console.log(pokemonChoice);
 
-      // this.randomCard = {
-      //   cardId: this.pokemonservice.pokemonArray[pokemonChoice].id + '',
-      //   image: this.pokemonservice.pokemonArray[pokemonChoice].imageUrl,
-      //   matchId: i+1
-      // };
+      this.randomCard = {
+        cardId: this.pokemonservice.pokemonArray[pokemonChoice].id + '',
+        image: this.pokemonservice.pokemonArray[pokemonChoice].imageUrl,
+        matchId: i + 1
+      };
 
       console.log(this.randomCard);
 
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: i+1
+        matchId: i + 1
       };
     }
 
@@ -38,7 +38,7 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i] = {
         cardId: '',
         image: '',
-        matchId: this.cardsArray[i-playerInfoService.gameInfo.matchesCount].matchId
+        matchId: this.cardsArray[i - playerInfoService.gameInfo.matchesCount].matchId
       }
     }
   }
