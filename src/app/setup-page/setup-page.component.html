@@ -24,7 +24,6 @@
       <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
         <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
         <mat-option [value]="mediumMatches">Medium: {{mediumMatches}}</mat-option>
-        <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
       </mat-select>
     </div>
   </mat-card-content>

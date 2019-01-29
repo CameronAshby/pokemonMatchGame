@@ -1,19 +1,17 @@
-*{
-  margin: 0;
-}
-
-.cardcontainer{
+.maincontainer{
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 100vh
+  height: 100%;
 }
-.ng-star-inserted{
-  width: 25%;
-  height: 10vh;
+.cardcontainer{
+  width: 12.5%;
 }
-//
-//.cards{
-//  width: 35%;
-//  height: 100px;
-//}
+
+.cards {
+  padding: 0;
+}
+
+.cardImage {
+  width: 100%;
+}

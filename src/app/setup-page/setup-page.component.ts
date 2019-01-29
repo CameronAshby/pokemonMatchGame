@@ -55,7 +55,6 @@ export class SetupPageComponent implements OnInit {
   buildMatches() {
     this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
     this.mediumMatches = this.playerInfoService.gameInfo.playerCount * 4;
-    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 6;
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;
