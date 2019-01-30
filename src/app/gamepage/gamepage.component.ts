@@ -58,10 +58,9 @@ export class GamepageComponent implements OnInit {
   toggleClicked(index: number, playerCard: Card) {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
-    console.log(this.matchArray.length);
-    if(this.matchArray.length == 2) {
+    setTimeout(()=>{if(this.matchArray.length == 2) {
       this.checkMatch(playerCard);
-    }
+    }}, 4000);
   }
 
   checkMatch(playerCard: Card) {
