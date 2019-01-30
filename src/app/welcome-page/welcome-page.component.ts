@@ -29,6 +29,7 @@ export class WelcomePageComponent implements OnInit {
   }
 
   newGame() {
+    this.playerInfoService.clearCurrentGame();
     this.router.navigate(['setupPage']);
   }
 
@@ -59,5 +60,9 @@ export class WelcomePageComponent implements OnInit {
         score: this.playerInfoService.playerInfo.score
       })
     }
+  }
+
+  logout() {
+    this.loginService.signOut();
   }
 }

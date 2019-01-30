@@ -48,10 +48,6 @@ export class PlayerInfoService {
         })
       );
   }
-  
-  dataTarget() {
-    return this.afs.collection('players').doc('player1');
-  }
 
   saveToFirebase(playerName: string, playerInfo: Player) {
     this.afs.collection(`players`).doc(playerName).set(playerInfo);
@@ -59,5 +55,15 @@ export class PlayerInfoService {
 
   saveGameToFirebase() {
     this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
+  }
+
+  clearCurrentGame() {
+    this.gameInfo = {
+      playerCount: 0,
+      players: [],
+      playerScores: [],
+      matchesCount: 0
+    };
+    this.afs.collection('gameInfo').doc('CurrentGame').delete();
   }
 }
