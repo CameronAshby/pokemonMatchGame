@@ -59,7 +59,7 @@ export class GamepageComponent implements OnInit {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
     setTimeout(()=>{if(this.matchArray.length == 2) {
-      this.checkMatch(playerCard);
+      this.checkMatch();
     }}, 4000);
   }
 

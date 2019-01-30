@@ -18,7 +18,7 @@ export class LoginServiceService {
   }
 
   signOut() {
-    this.afAuth.auth.signOut();
+    return this.afAuth.auth.signOut();
   }
 
   // Access current user: this.afAuth.auth.currentUser
