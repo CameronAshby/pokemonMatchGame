@@ -14,6 +14,7 @@ export class GamepageComponent implements OnInit {
   randomCardIndex: number;
 
   matchArray: Card[] = [];
+  matchIndexArray: number[] = [];
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
   }
@@ -58,24 +59,39 @@ export class GamepageComponent implements OnInit {
   toggleClicked(index: number, playerCard: Card) {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
+    this.matchIndexArray.push(index);
     console.log(this.matchArray.length);
     if(this.matchArray.length == 2) {
-      this.checkMatch(playerCard);
+      this.checkMatch();
     }
   }
 
-  checkMatch(playerCard: Card) {
+  checkMatch() {
     if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
       console.log('Match Found!');
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
+      
+      if(this.matchIndexArray[0] < this.matchIndexArray[1]) {
+        this.matchIndexArray[1] -= 1;
+      }
+
+      this.cardsArray.splice(this.matchIndexArray[0], 1);
+      this.cardsArray.splice(this.matchIndexArray[1], 1);
       this.matchArray = [];
+      this.matchIndexArray = [];
     }
     else {
       console.log('No Match!');
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
       this.matchArray = [];
+    }
+  }
+
+  showAll() {
+    for(let i = 0; i < this.cardsArray.length; i++) {
+      this.cardsArray[i].clicked = true;
     }
   }
 }
