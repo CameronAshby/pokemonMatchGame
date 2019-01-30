@@ -29,6 +29,7 @@ export class WelcomePageComponent implements OnInit {
   }
 
   newGame() {
+    this.playerInfoService.clearCurrentGame();
     this.router.navigate(['setupPage']);
   }
 
