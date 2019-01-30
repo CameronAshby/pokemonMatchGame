@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PokemonService} from '../services/apiService/apistuff.service';
 import {Card} from '../interfaces/card';
 import {PlayerInfoService} from '../services/playerInfo/player-info.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-gamepage',
@@ -16,7 +17,11 @@ export class GamepageComponent implements OnInit {
   matchArray: Card[] = [];
   matchIndexArray: number[] = [];
 
-  constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
+  constructor(
+    private pokemonservice: PokemonService,
+    private playerInfoService: PlayerInfoService,
+    private router: Router
+  ) {
   }
 
   ngOnInit() {
@@ -75,12 +80,16 @@ export class GamepageComponent implements OnInit {
 
       this.matchArray = [];
       this.matchIndexArray = [];
+
+      this.playerInfoService.gameInfo.matchesCount -= 1;
     }
     else {
       console.log('No Match!');
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
+
       this.matchArray = [];
+      this.matchIndexArray = [];
     }
   }
 
@@ -96,6 +105,10 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[ran] = this.cardsArray[i];
       this.cardsArray[i] = temp;
     }
+  }
+
+  viewStats() {
+    this.router.navigate(['statsPage']);
   }
 }
 
