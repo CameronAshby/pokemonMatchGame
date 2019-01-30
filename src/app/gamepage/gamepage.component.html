@@ -1,7 +1,7 @@
 <div class="maincontainer">
   <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
     <mat-card class="cards">
-      <img (click)="toggleClicked(i)" class="cardImage" src="{{cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
+      <img (click)="toggleClicked(i, cards)" class="cardImage" src="{{cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
     </mat-card>
   </div>
 </div>
