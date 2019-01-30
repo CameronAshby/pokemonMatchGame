@@ -24,6 +24,7 @@ export class GamepageComponent implements OnInit {
       .then(data => {
           this.pokemonservice.pokemonArray = data;
           this.buildCards();
+          this.randomizeCards();
         }
       );
   }
@@ -85,4 +86,14 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i].clicked = true;
     }
   }
+  randomizeCards(){
+    for (let i = 0; i < this.cardsArray.length; i++){
+      let ran = Math.floor(Math.random() * this.cardsArray.length);
+      let temp = this.cardsArray[ran];
+      this.cardsArray[ran] = this.cardsArray[i];
+      this.cardsArray[i] = temp;
+    }
+  }
 }
+
+
