@@ -13,7 +13,7 @@ export class GamepageComponent implements OnInit {
   cardsArray: Card[] = [];
   randomCardIndex: number;
 
-
+  matchArray: Card[] = [];
 
   constructor(private pokemonservice: PokemonService, private playerInfoService: PlayerInfoService) {
   }
@@ -55,7 +55,27 @@ export class GamepageComponent implements OnInit {
     this.randomCardIndex = Math.floor((Math.random() * 999));
   }
 
-  toggleClicked(index: number) {
-    this.cardsArray[index].clicked = !this.cardsArray[index].clicked;
+  toggleClicked(index: number, playerCard: Card) {
+    this.cardsArray[index].clicked = true;
+    this.matchArray.push(playerCard);
+    console.log(this.matchArray.length);
+    if(this.matchArray.length == 2) {
+      this.checkMatch(playerCard);
+    }
+  }
+
+  checkMatch(playerCard: Card) {
+    if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
+      console.log('Match Found!');
+      this.matchArray[0].clicked = false;
+      this.matchArray[1].clicked = false;
+      this.matchArray = [];
+    }
+    else {
+      console.log('No Match!');
+      this.matchArray[0].clicked = false;
+      this.matchArray[1].clicked = false;
+      this.matchArray = [];
+    }
   }
 }
