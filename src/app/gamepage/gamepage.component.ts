@@ -60,7 +60,7 @@ export class GamepageComponent implements OnInit {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
     this.matchIndexArray.push(index);
-    console.log(this.matchArray.length);
+
     if(this.matchArray.length == 2) {
       this.checkMatch();
     }
@@ -69,15 +69,7 @@ export class GamepageComponent implements OnInit {
   checkMatch() {
     if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
       console.log('Match Found!');
-      this.matchArray[0].clicked = false;
-      this.matchArray[1].clicked = false;
-      
-      if(this.matchIndexArray[0] < this.matchIndexArray[1]) {
-        this.matchIndexArray[1] -= 1;
-      }
 
-      this.cardsArray.splice(this.matchIndexArray[0], 1);
-      this.cardsArray.splice(this.matchIndexArray[1], 1);
       this.matchArray = [];
       this.matchIndexArray = [];
     }
