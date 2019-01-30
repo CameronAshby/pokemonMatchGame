@@ -60,4 +60,8 @@ export class WelcomePageComponent implements OnInit {
       })
     }
   }
+
+  logout() {
+    this.loginService.signOut();
+  }
 }
