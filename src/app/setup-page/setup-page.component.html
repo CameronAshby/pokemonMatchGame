@@ -27,5 +27,5 @@
       </mat-select>
     </div>
   </mat-card-content>
-  <button mat-raised-button color="primary" (click)="saveGameToFirebase(); gameStart()">Start Game</button>
+  <button *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players" mat-raised-button color="primary" (click)="saveGameToFirebase(); gameStart()">Start Game</button>
 </mat-card>
