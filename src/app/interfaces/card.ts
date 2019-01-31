@@ -3,4 +3,5 @@ export interface Card {
   image: string;
   matchId: number;
   clicked: boolean;
+  matched: boolean;
 }
