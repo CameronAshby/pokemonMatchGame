@@ -16,7 +16,6 @@ export class SetupPageComponent implements OnInit {
 
   previousPlayers: Player[] = [];
   smallMatches: number;
-  mediumMatches: number;
   largeMatches: number;
   players = new FormControl();
 
@@ -59,5 +58,9 @@ export class SetupPageComponent implements OnInit {
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;
     }
+  }
+
+  checkPlayers() {
+    console.log('check reached');
   }
 }
