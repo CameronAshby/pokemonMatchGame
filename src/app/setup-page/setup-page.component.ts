@@ -33,6 +33,10 @@ export class SetupPageComponent implements OnInit {
       private router: Router,
       private pokemonService: PokemonService
   ) {
+
+    if(!this.loginService.loggedIn) {
+      this.router.navigate(['welcomePage']);
+    }
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
         this.previousPlayers.push(doc.data() as Player);
@@ -68,6 +72,13 @@ export class SetupPageComponent implements OnInit {
   checkPlayers() {
     if(this.playerInfoService.gameInfo.players.length == this.playerInfoService.gameInfo.playerCount-1) {
       this.disablePlayers = true;
+      this.playerInfoService.gameInfo.players.push(this.loginService.playerName);
     }
+  }
+
+  resetPage() {
+    this.disablePlayers = false;
+    this.playerInfoService.clearCurrentGame();
+    this.router.navigate(['setupPage']);
   }
 }

@@ -1,5 +1,4 @@
-<app-sign-up *ngIf="!loginService.loggedIn"></app-sign-up>
-<mat-card *ngIf="loginService.loggedIn">
+<mat-card>
   <mat-card-content>
     <div>
       Player Name: {{loginService.playerName}}
@@ -28,9 +27,14 @@
       </mat-select>
     </div>
   </mat-card-content>
-  <button
-    *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players"
-    mat-raised-button color="primary"
-    (click)="saveGameToFirebase(); gameStart()"
-  >Start Game</button>
+  <mat-card *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players" class="gameInfoContainer">
+    <mat-card-title>Verify Game Information</mat-card-title>
+    <mat-card-content>Players: <span *ngFor="let gamePlayer of playerInfoService.gameInfo.players; let i = index">{{gamePlayer}}{{i == playerInfoService.gameInfo.players.length - 1 ? '' : ', '}}</span></mat-card-content>
+    <mat-card-content>Matches: {{playerInfoService.gameInfo.matchesCount}}</mat-card-content>
+    <button
+      mat-raised-button color="primary"
+      (click)="saveGameToFirebase(); gameStart()"
+    >Start Game</button>
+    <button mat-raised-button (click)="resetPage()">Reset Setup</button>
+  </mat-card>
 </mat-card>
