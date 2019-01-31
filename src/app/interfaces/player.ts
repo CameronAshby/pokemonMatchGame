@@ -6,4 +6,5 @@ export interface Player {
   playersBeaten: string[];
   playersLostTo: string[];
   score: number;
+  selected: boolean;
 }

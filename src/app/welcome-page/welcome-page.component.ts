@@ -46,7 +46,8 @@ export class WelcomePageComponent implements OnInit {
         gamesWon: 0,
         playersBeaten: [],
         playersLostTo: [],
-        score: 0
+        score: 0,
+        selected: false
       })
     }
     else {
@@ -57,12 +58,9 @@ export class WelcomePageComponent implements OnInit {
         gamesWon: this.playerInfoService.playerInfo.gamesWon,
         playersBeaten: this.playerInfoService.playerInfo.playersBeaten,
         playersLostTo: this.playerInfoService.playerInfo.playersLostTo,
-        score: this.playerInfoService.playerInfo.score
+        score: this.playerInfoService.playerInfo.score,
+        selected: false
       })
     }
-  }
-
-  logout() {
-    this.loginService.signOut();
   }
 }

@@ -68,7 +68,7 @@ export class GamepageComponent implements OnInit {
     setTimeout(()=>{
       if(this.matchArray.length == 2) {
         this.checkMatch();
-      }}, 4000);
+      }}, 2000);
   }
 
   checkMatch() {
@@ -98,6 +98,7 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i].clicked = true;
     }
   }
+
   randomizeCards(){
     for (let i = 0; i < this.cardsArray.length; i++){
       let ran = Math.floor(Math.random() * this.cardsArray.length);
