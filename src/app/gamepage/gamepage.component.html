@@ -1,8 +1,10 @@
+
 <button (click)="showAll()">Show All</button>
+<button *ngIf="playerInfoService.gameInfo.matchesCount == 0" (click)="viewStats()">View Stats</button>
 <div class="maincontainer">
   <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
     <mat-card class="cards">
-      <img (click)="toggleClicked(i, cards)" class="cardImage" src="{{cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
+      <img [style.display]="cards.matched ? 'none' : 'flex'" (click)="toggleClicked(i, cards)" class="cardImage" src="{{cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
     </mat-card>
   </div>
 </div>
