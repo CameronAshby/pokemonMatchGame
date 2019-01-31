@@ -16,9 +16,9 @@ export class SetupPageComponent implements OnInit {
 
   previousPlayers: Player[] = [];
   smallMatches: number;
-  mediumMatches: number;
   largeMatches: number;
   players = new FormControl();
+  disablePlayers: boolean = false;
 
   get playerInfo() {
     return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
@@ -36,6 +36,10 @@ export class SetupPageComponent implements OnInit {
     afs.collection('players').get().subscribe(documents => {
       documents.forEach(doc => {
         this.previousPlayers.push(doc.data() as Player);
+        let checkName = this.previousPlayers.pop();
+        if(checkName.name != this.loginService.playerName) {
+          this.previousPlayers.push(checkName);
+        }
       });
     });
   }
@@ -58,6 +62,12 @@ export class SetupPageComponent implements OnInit {
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;
+    }
+  }
+
+  checkPlayers() {
+    if(this.playerInfoService.gameInfo.players.length == this.playerInfoService.gameInfo.playerCount-1) {
+      this.disablePlayers = true;
     }
   }
 }
