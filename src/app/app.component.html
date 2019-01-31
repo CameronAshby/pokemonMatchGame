@@ -1,4 +1,4 @@
-<mat-toolbar color="accent">
+<mat-toolbar color="accent" class="appToolbar">
   <mat-icon class="homeIcon" (click)="homePage()">home</mat-icon>
   <button *ngIf="!loginService.loggedIn" mat-button (click)="loginWithGoogle()">Sign In</button>
   <button *ngIf="loginService.loggedIn" mat-button (click)="logout()">Sign Out</button>
