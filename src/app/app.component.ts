@@ -17,4 +17,16 @@ export class AppComponent {
   homePage() {
     this.router.navigate(['welcomePage/signIn']);
   }
+
+  loginWithGoogle() {
+    this.loginService.signInPopupGoogle()
+      .then(data => {
+        this.loginService.playerName = data.user.displayName;
+        this.loginService.loggedIn = true;
+      });
+  }
+
+  logout() {
+    this.loginService.signOut();
+  }
 }
