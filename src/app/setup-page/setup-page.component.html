@@ -14,7 +14,7 @@
     <div *ngIf="playerInfoService.gameInfo.playerCount">
       <p>Select Other Players</p>
       <mat-form-field>
-        <mat-select placeholder="Select Other Players" [formControl]="players" multiple [(ngModel)]="playerInfoService.gameInfo.players">
+        <mat-select placeholder="Select Other Players" [value]="playerInfoService.gameInfo.playerCount" [formControl]="players" [multiple]="true" (selectionChange)="playerInfoService.limitSelection()" [(ngModel)]="playerInfoService.gameInfo.players">
           <mat-option *ngFor="let player of previousPlayers" [value]="player.name">{{player.name}}</mat-option>
         </mat-select>
       </mat-form-field>

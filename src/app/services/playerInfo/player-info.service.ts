@@ -14,7 +14,6 @@ import {Game} from '../../interfaces/game';
   providedIn: 'root'
 })
 export class PlayerInfoService {
-
   playerInfo: Player;
   gameInfo: Game = {
     playerCount: 0,
