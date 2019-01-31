@@ -1,4 +1,5 @@
-<mat-card>
+<app-sign-up *ngIf="!loginService.loggedIn"></app-sign-up>
+<mat-card *ngIf="loginService.loggedIn">
   <mat-card-content>
     <div>
       Player Name: {{loginService.playerName}}
@@ -11,11 +12,11 @@
         <mat-option value=4>4</mat-option>
       </mat-select>
     </div>
-    <div *ngIf="playerInfoService.gameInfo.playerCount">
-      <p>Select Other Players</p>
+    <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.playerCount != 1">
+      <p>Select {{playerInfoService.gameInfo.playerCount-1}} Other Players To Play Against</p>
       <mat-form-field>
-        <mat-select placeholder="Select Other Players" [formControl]="players" multiple [(ngModel)]="playerInfoService.gameInfo.players">
-          <mat-option *ngFor="let player of previousPlayers" [value]="player.name">{{player.name}}</mat-option>
+        <mat-select placeholder="Select Other Players" [formControl]="players" (selectionChange)="checkPlayers()" multiple [(ngModel)]="playerInfoService.gameInfo.players">
+          <mat-option *ngFor="let player of previousPlayers" (change)="!player.selected" [disabled]="player.selected || disablePlayers" [value]="player.name">{{player.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
@@ -27,5 +28,9 @@
       </mat-select>
     </div>
   </mat-card-content>
-  <button mat-raised-button color="primary" (click)="saveGameToFirebase(); gameStart()">Start Game</button>
+  <button
+    *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players"
+    mat-raised-button color="primary"
+    (click)="saveGameToFirebase(); gameStart()"
+  >Start Game</button>
 </mat-card>

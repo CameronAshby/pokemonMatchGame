@@ -25,7 +25,6 @@ export class LoginServiceService {
       this.loggedIn = false;
       this.router.navigate(['welcomePage']);
     });
-
   }
 
   // Access current user: this.afAuth.auth.currentUser

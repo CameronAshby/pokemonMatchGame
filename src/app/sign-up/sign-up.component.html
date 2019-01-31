@@ -1,11 +1,9 @@
 <mat-card *ngIf="!loginService.loggedIn" class="signInContainer">
-  <mat-card class="contentContainer">
+  <div class="contentContainer">
     <mat-card-title>Please Login To Continue</mat-card-title>
-
     <mat-card-content>
       <button mat-raised-button (click)="loginWithGoogle()">Sign In</button>
-      <!--<button mat-raised-button (click)="signOut()">Sign Out</button>-->
     </mat-card-content>
-  </mat-card>
+  </div>
 </mat-card>
 

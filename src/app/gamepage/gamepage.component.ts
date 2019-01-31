@@ -68,7 +68,7 @@ export class GamepageComponent implements OnInit {
     setTimeout(()=>{
       if(this.matchArray.length == 2) {
         this.checkMatch();
-      }}, 4000);
+      }}, 2000);
   }
 
   checkMatch() {
