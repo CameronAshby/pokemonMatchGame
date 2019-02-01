@@ -3,6 +3,7 @@ import { PokemonService} from '../services/apiService/apistuff.service';
 import {Card} from '../interfaces/card';
 import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 import {Router} from '@angular/router';
+import {LoginServiceService} from '../services/auth/login-service.service';
 
 @Component({
   selector: 'app-gamepage',
@@ -17,11 +18,17 @@ export class GamepageComponent implements OnInit {
   matchArray: Card[] = [];
   matchIndexArray: number[] = [];
 
+  currentPlayerIndex: number = 0;
+
   constructor(
     private pokemonservice: PokemonService,
     private playerInfoService: PlayerInfoService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginServiceService
   ) {
+    if(!this.loginService.loggedIn) {
+      this.router.navigate(['welcomePage']);
+    }
   }
 
   ngOnInit() {
@@ -82,6 +89,8 @@ export class GamepageComponent implements OnInit {
       this.matchIndexArray = [];
 
       this.playerInfoService.gameInfo.matchesCount -= 1;
+
+      this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] += 5;
     }
     else {
       console.log('No Match!');
@@ -90,6 +99,19 @@ export class GamepageComponent implements OnInit {
 
       this.matchArray = [];
       this.matchIndexArray = [];
+
+      this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] -= 1;
+    }
+    this.changeTurns();
+  }
+
+  changeTurns() {
+    this.playerInfoService.saveGameToFirebase();
+
+    this.currentPlayerIndex += 1;
+
+    if(this.currentPlayerIndex == this.playerInfoService.gameInfo.playerCount) {
+      this.currentPlayerIndex = 0;
     }
   }
 
@@ -109,8 +131,23 @@ export class GamepageComponent implements OnInit {
   }
 
   viewStats() {
+    this.setWinner();
+    this.playerInfoService.updatePlayerProfile(this.playerInfoService.gameInfo);
     this.router.navigate(['statsPage']);
   }
+
+  setWinner() {
+    let winner = this.playerInfoService.gameInfo.players[0];
+    for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
+      if(this.playerInfoService.gameInfo.playerScores[i] > this.playerInfoService.gameInfo.playerScores[i-1]) {
+        winner = this.playerInfoService.gameInfo.players[i];
+      }
+    }
+    console.log(winner);
+    this.playerInfoService.gameInfo.winner = winner;
+    this.playerInfoService.saveGameToFirebase();
+  }
+
 }
 
 

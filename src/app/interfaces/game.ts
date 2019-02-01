@@ -3,4 +3,5 @@ export interface Game {
   players: string[];
   playerScores: number[];
   matchesCount: number;
+  winner: string;
 }

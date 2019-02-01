@@ -20,7 +20,8 @@ export class PlayerInfoService {
     playerCount: 0,
     players: [],
     playerScores: [],
-    matchesCount: 0
+    matchesCount: 0,
+    winner: ''
   };
 
   private playerRef: AngularFirestoreCollection<Player>;
@@ -57,12 +58,17 @@ export class PlayerInfoService {
     this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
   }
 
+  updatePlayerProfile(currentGame: Game) {
+
+  }
+
   clearCurrentGame() {
     this.gameInfo = {
       playerCount: 0,
       players: [],
       playerScores: [],
-      matchesCount: 0
+      matchesCount: 0,
+      winner:''
     };
     this.afs.collection('gameInfo').doc('CurrentGame').delete();
   }

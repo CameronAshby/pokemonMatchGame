@@ -26,6 +26,9 @@
         <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
       </mat-select>
     </div>
+    <div>
+      Select Set
+    </div>
   </mat-card-content>
   <mat-card *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players" class="gameInfoContainer">
     <mat-card-title>Verify Game Information</mat-card-title>
