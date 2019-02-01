@@ -61,6 +61,10 @@ export class SetupPageComponent implements OnInit {
   }
 
   buildMatches() {
+    if(this.playerInfoService.gameInfo.playerCount == 1) {
+      this.playerInfoService.gameInfo.players.push(this.loginService.playerName);
+    }
+
     this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
     this.largeMatches = this.playerInfoService.gameInfo.playerCount * 4;
 
