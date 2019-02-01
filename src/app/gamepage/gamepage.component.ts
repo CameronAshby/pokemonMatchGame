@@ -147,11 +147,15 @@ export class GamepageComponent implements OnInit {
         winner = [this.playerInfoService.gameInfo.players[i-1], this.playerInfoService.gameInfo.players[i]];
       }
     }
-    console.log(winner);
-    console.log(typeof winner);
+
     if(typeof winner == 'string') {
       this.playerInfoService.gameInfo.winner = winner;
       this.playerInfoService.saveGameToFirebase();
+
+      if(this.playerInfoService.gameInfo.winner == this.loginService.playerName) {
+        this.playerInfoService.playerInfo.gamesWon += 1;
+        this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+      }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
