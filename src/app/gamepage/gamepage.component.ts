@@ -80,7 +80,6 @@ export class GamepageComponent implements OnInit {
 
   checkMatch() {
     if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
-      console.log('Match Found!');
 
       this.cardsArray[this.matchIndexArray[0]].matched = true;
       this.cardsArray[this.matchIndexArray[1]].matched = true;
@@ -93,7 +92,7 @@ export class GamepageComponent implements OnInit {
       this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] += 5;
     }
     else {
-      console.log('No Match!');
+
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
 
@@ -132,20 +131,31 @@ export class GamepageComponent implements OnInit {
 
   viewStats() {
     this.setWinner();
-    this.playerInfoService.updatePlayerProfile(this.playerInfoService.gameInfo);
     this.router.navigate(['statsPage']);
   }
 
   setWinner() {
-    let winner = this.playerInfoService.gameInfo.players[0];
+    let winner: any = this.playerInfoService.gameInfo.players[0];
     for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
       if(this.playerInfoService.gameInfo.playerScores[i] > this.playerInfoService.gameInfo.playerScores[i-1]) {
         winner = this.playerInfoService.gameInfo.players[i];
       }
+      else if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+        winner = [winner, this.playerInfoService.gameInfo.players[i]];
+      }
     }
     console.log(winner);
-    this.playerInfoService.gameInfo.winner = winner;
-    this.playerInfoService.saveGameToFirebase();
+    console.log(typeof winner);
+    if(typeof winner == 'string') {
+      this.playerInfoService.gameInfo.winner = winner;
+      this.playerInfoService.saveGameToFirebase();
+    }
+    else {
+      this.playerInfoService.gameInfo.winner = 'tie';
+      this.playerInfoService.saveTieGameToFirebase(winner, this.loginService.playerName);
+    }
+
+
   }
 
 }

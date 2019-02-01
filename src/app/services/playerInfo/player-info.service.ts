@@ -41,9 +41,11 @@ export class PlayerInfoService {
               gamesLost: item.payload.doc.data().gamesLost,
               gamesPlayed: item.payload.doc.data().gamesPlayed,
               gamesWon: item.payload.doc.data().gamesWon,
+              gamesTied: item.payload.doc.data().gamesTied,
               playersBeaten: item.payload.doc.data().playersBeaten,
               playersLostTo: item.payload.doc.data().playersLostTo,
-              score: item.payload.doc.data().score
+              score: item.payload.doc.data().score,
+              selected: item.payload.doc.data().selected
             } as Player;
           });
         })
@@ -58,8 +60,8 @@ export class PlayerInfoService {
     this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
   }
 
-  updatePlayerProfile(currentGame: Game) {
-
+  saveTieGameToFirebase(winnerArray: string[], playerName: string) {
+    this.afs.collection(`players`).doc(playerName).set(this.playerInfo.gamesTied += 1);
   }
 
   clearCurrentGame() {

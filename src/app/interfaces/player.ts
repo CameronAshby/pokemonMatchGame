@@ -3,6 +3,7 @@ export interface Player {
   gamesLost: number;
   gamesPlayed: number;
   gamesWon: number;
+  gamesTied: number;
   playersBeaten: string[];
   playersLostTo: string[];
   score: number;
