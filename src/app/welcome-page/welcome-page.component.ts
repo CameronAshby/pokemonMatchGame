@@ -13,8 +13,10 @@ import { AngularFirestore } from 'angularfire2/firestore';
 export class WelcomePageComponent implements OnInit {
 
   get playerInfo() {
-    return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
-      this.playerInfoService.playerInfo = doc.data() as Player;
+    return this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(async doc => {
+      this.playerInfoService.playerInfo = await doc.data() as Player;
+      this.saveToFirebase();
+      console.log('complete');
     });
   }
 
@@ -38,7 +40,9 @@ export class WelcomePageComponent implements OnInit {
   }
 
   saveToFirebase() {
-    if(!this.playerInfoService.playerInfo) {
+    console.log('need player info');
+
+    if(!this.playerInfo) {
       this.playerInfoService.saveToFirebase(this.loginService.playerName, {
         name: this.loginService.playerName,
         gamesLost: 0,

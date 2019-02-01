@@ -141,7 +141,8 @@ export class GamepageComponent implements OnInit {
         winner = this.playerInfoService.gameInfo.players[i];
       }
       else if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
-        winner = [winner, this.playerInfoService.gameInfo.players[i]];
+        winner = [];
+        winner = [this.playerInfoService.gameInfo.players[i-1], this.playerInfoService.gameInfo.players[i]];
       }
     }
     console.log(winner);
@@ -151,10 +152,14 @@ export class GamepageComponent implements OnInit {
       this.playerInfoService.saveGameToFirebase();
     }
     else {
-      this.playerInfoService.gameInfo.winner = 'tie';
-      this.playerInfoService.saveTieGameToFirebase(winner, this.loginService.playerName);
+      this.playerInfoService.playerInfo.gamesTied += 1;
+      this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
     }
 
+    this.updatePlayerProfile();
+  }
+
+  updatePlayerProfile(){
 
   }
 

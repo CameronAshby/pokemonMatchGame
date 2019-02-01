@@ -9,6 +9,7 @@ import {
 } from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
 import {Game} from '../../interfaces/game';
+import {LoginServiceService} from '../auth/login-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class PlayerInfoService {
   private playerRef: AngularFirestoreCollection<Player>;
   private playerCollectionRef: AngularFirestoreCollection<Player[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private loginService: LoginServiceService) {
     this.playerRef = this.afs.collection<Player>(`players`);
     this.playerCollectionRef = this.afs.collection<Player[]>(`players`);
   }
@@ -58,10 +59,6 @@ export class PlayerInfoService {
 
   saveGameToFirebase() {
     this.afs.collection(`gameInfo`).doc('CurrentGame').set(this.gameInfo);
-  }
-
-  saveTieGameToFirebase(winnerArray: string[], playerName: string) {
-    this.afs.collection(`players`).doc(playerName).set(this.playerInfo.gamesTied += 1);
   }
 
   clearCurrentGame() {
