@@ -9,6 +9,7 @@ import {
 } from 'angularfire2/firestore';
 import {map} from 'rxjs/operators';
 import {Game} from '../../interfaces/game';
+import {LoginServiceService} from '../auth/login-service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,13 +21,14 @@ export class PlayerInfoService {
     playerCount: 0,
     players: [],
     playerScores: [],
-    matchesCount: 0
+    matchesCount: 0,
+    winner: ''
   };
 
   private playerRef: AngularFirestoreCollection<Player>;
   private playerCollectionRef: AngularFirestoreCollection<Player[]>;
 
-  constructor(private afs: AngularFirestore) {
+  constructor(private afs: AngularFirestore, private loginService: LoginServiceService) {
     this.playerRef = this.afs.collection<Player>(`players`);
     this.playerCollectionRef = this.afs.collection<Player[]>(`players`);
   }
@@ -40,9 +42,11 @@ export class PlayerInfoService {
               gamesLost: item.payload.doc.data().gamesLost,
               gamesPlayed: item.payload.doc.data().gamesPlayed,
               gamesWon: item.payload.doc.data().gamesWon,
+              gamesTied: item.payload.doc.data().gamesTied,
               playersBeaten: item.payload.doc.data().playersBeaten,
               playersLostTo: item.payload.doc.data().playersLostTo,
-              score: item.payload.doc.data().score
+              score: item.payload.doc.data().score,
+              selected: item.payload.doc.data().selected
             } as Player;
           });
         })
@@ -62,7 +66,8 @@ export class PlayerInfoService {
       playerCount: 0,
       players: [],
       playerScores: [],
-      matchesCount: 0
+      matchesCount: 0,
+      winner:''
     };
     this.afs.collection('gameInfo').doc('CurrentGame').delete();
   }

@@ -3,6 +3,7 @@ import { PokemonService} from '../services/apiService/apistuff.service';
 import {Card} from '../interfaces/card';
 import {PlayerInfoService} from '../services/playerInfo/player-info.service';
 import {Router} from '@angular/router';
+import {LoginServiceService} from '../services/auth/login-service.service';
 
 @Component({
   selector: 'app-gamepage',
@@ -17,11 +18,17 @@ export class GamepageComponent implements OnInit {
   matchArray: Card[] = [];
   matchIndexArray: number[] = [];
 
+  currentPlayerIndex: number = 0;
+
   constructor(
     private pokemonservice: PokemonService,
     private playerInfoService: PlayerInfoService,
-    private router: Router
+    private router: Router,
+    private loginService: LoginServiceService
   ) {
+    if(!this.loginService.loggedIn) {
+      this.router.navigate(['welcomePage']);
+    }
   }
 
   ngOnInit() {
@@ -73,7 +80,6 @@ export class GamepageComponent implements OnInit {
 
   checkMatch() {
     if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
-      console.log('Match Found!');
 
       this.cardsArray[this.matchIndexArray[0]].matched = true;
       this.cardsArray[this.matchIndexArray[1]].matched = true;
@@ -82,14 +88,29 @@ export class GamepageComponent implements OnInit {
       this.matchIndexArray = [];
 
       this.playerInfoService.gameInfo.matchesCount -= 1;
+
+      this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] += 5;
     }
     else {
-      console.log('No Match!');
+
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
 
       this.matchArray = [];
       this.matchIndexArray = [];
+
+      this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] -= 1;
+    }
+    this.changeTurns();
+  }
+
+  changeTurns() {
+    this.playerInfoService.saveGameToFirebase();
+
+    this.currentPlayerIndex += 1;
+
+    if(this.currentPlayerIndex == this.playerInfoService.gameInfo.playerCount) {
+      this.currentPlayerIndex = 0;
     }
   }
 
@@ -108,8 +129,39 @@ export class GamepageComponent implements OnInit {
   }
 
   viewStats() {
+    this.setWinner();
     this.router.navigate(['statsPage']);
   }
+
+  setWinner() {
+    let winner: any = this.playerInfoService.gameInfo.players[0];
+    for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
+      if(this.playerInfoService.gameInfo.playerScores[i] > this.playerInfoService.gameInfo.playerScores[i-1]) {
+        winner = this.playerInfoService.gameInfo.players[i];
+      }
+      else if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+        winner = [];
+        winner = [this.playerInfoService.gameInfo.players[i-1], this.playerInfoService.gameInfo.players[i]];
+      }
+    }
+    console.log(winner);
+    console.log(typeof winner);
+    if(typeof winner == 'string') {
+      this.playerInfoService.gameInfo.winner = winner;
+      this.playerInfoService.saveGameToFirebase();
+    }
+    else {
+      this.playerInfoService.playerInfo.gamesTied += 1;
+      this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+    }
+
+    this.updatePlayerProfile();
+  }
+
+  updatePlayerProfile(){
+
+  }
+
 }
 
 
