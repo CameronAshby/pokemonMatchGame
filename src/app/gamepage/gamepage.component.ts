@@ -20,6 +20,8 @@ export class GamepageComponent implements OnInit {
 
   currentPlayerIndex: number = 0;
 
+  gameReady: boolean = false;
+
   constructor(
     private pokemonservice: PokemonService,
     private playerInfoService: PlayerInfoService,
@@ -37,6 +39,7 @@ export class GamepageComponent implements OnInit {
           this.pokemonservice.pokemonArray = data;
           this.buildCards();
           this.randomizeCards();
+          this.gameReady = true;
         }
       );
   }
