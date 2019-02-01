@@ -133,6 +133,7 @@ export class GamepageComponent implements OnInit {
 
   viewStats() {
     this.setWinner();
+    this.updatePlayerProfile();
     this.router.navigate(['statsPage']);
   }
 
@@ -161,12 +162,22 @@ export class GamepageComponent implements OnInit {
       this.playerInfoService.playerInfo.gamesTied += 1;
       this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
     }
-
-    this.updatePlayerProfile();
   }
 
   updatePlayerProfile(){
 
+    let playerIndex: number;
+
+    for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
+      if(this.playerInfoService.gameInfo.players[1] == this.loginService.playerName) {
+        playerIndex = i;
+      }
+    }
+
+    this.playerInfoService.playerInfo.gamesPlayed += 1;
+    this.playerInfoService.playerInfo.score += this.playerInfoService.gameInfo.playerScores[playerIndex];
+
+    this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
   }
 
 }
