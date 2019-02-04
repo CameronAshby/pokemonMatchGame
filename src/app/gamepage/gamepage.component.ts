@@ -70,7 +70,7 @@ export class GamepageComponent implements OnInit {
   }
 
   getRandomCard() {
-    this.randomCardIndex = Math.floor((Math.random() * 999));
+    this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount));
   }
 
   toggleClicked(index: number, playerCard: Card) {

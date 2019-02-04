@@ -22,11 +22,11 @@
     </div>
     <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players">
       Card Set to Play With
-      <mat-select placeholder="Select Set to Play" [(ngModel)]="playerInfoService.gameInfo.chosenSet">
-        <mat-option [value]="set.name" *ngFor="let set of pokemonService.pokemonSets">{{set.name}}</mat-option>
+      <mat-select placeholder="Select Set to Play" [(ngModel)]="pokemonService.pokemonSelectedSet">
+        <mat-option [value]="set" *ngFor="let set of pokemonService.pokemonSets">{{set.name}}</mat-option>
       </mat-select>
     </div>
-    <div *ngIf="playerInfoService.gameInfo.chosenSet">
+    <div *ngIf="pokemonService.pokemonSelectedSet">
       Number of Matches To Be Found
       <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
         <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
@@ -34,10 +34,10 @@
       </mat-select>
     </div>
   </mat-card-content>
-  <mat-card *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players && playerInfoService.gameInfo.chosenSet" class="gameInfoContainer">
+  <mat-card *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players && pokemonService.pokemonSetCardCount" class="gameInfoContainer">
     <mat-card-title>Verify Game Information</mat-card-title>
     <mat-card-content>Players: <span *ngFor="let gamePlayer of playerInfoService.gameInfo.players; let i = index">{{gamePlayer}}{{i == playerInfoService.gameInfo.players.length - 1 ? '' : ', '}}</span></mat-card-content>
-    <mat-card-content>Card Set: {{playerInfoService.gameInfo.chosenSet}}</mat-card-content>
+    <mat-card-content>Card Set: {{pokemonService.pokemonSelectedSet.name}}</mat-card-content>
     <mat-card-content>Matches: {{playerInfoService.gameInfo.matchesCount}}</mat-card-content>
     <button
       mat-raised-button color="primary"
