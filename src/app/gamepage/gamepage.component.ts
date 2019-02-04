@@ -151,16 +151,16 @@ export class GamepageComponent implements OnInit {
 
     if(typeof winner == 'string') {
       this.playerInfoService.gameInfo.winner = winner;
-      this.playerInfoService.saveGameToFirebase();
+      // this.playerInfoService.saveGameToFirebase();
 
       if(this.playerInfoService.gameInfo.winner == this.loginService.playerName) {
         this.playerInfoService.playerInfo.gamesWon += 1;
-        this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+        // this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
       }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
-      this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+      // this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
     }
   }
 
@@ -169,13 +169,18 @@ export class GamepageComponent implements OnInit {
     let playerIndex: number;
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
-      if(this.playerInfoService.gameInfo.players[1] == this.loginService.playerName) {
+      if(this.playerInfoService.gameInfo.players[i] == this.loginService.playerName) {
         playerIndex = i;
       }
     }
 
     this.playerInfoService.playerInfo.gamesPlayed += 1;
     this.playerInfoService.playerInfo.score += this.playerInfoService.gameInfo.playerScores[playerIndex];
+    console.log(playerIndex);
+    console.log(this.playerInfoService.playerInfo.score);
+    console.log(this.playerInfoService.gameInfo.playerScores);
+    console.log(this.playerInfoService.gameInfo.playerScores[playerIndex]);
+    console.log(this.playerInfoService.playerInfo.gamesPlayed);
 
     this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
   }
