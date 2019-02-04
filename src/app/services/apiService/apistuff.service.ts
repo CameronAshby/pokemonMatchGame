@@ -18,6 +18,7 @@ export class PokemonService {
 
   getPokemon() {
     return PokemonTCG.Card.all();
+    // return PokemonTCG.Set.find(this.playerInfoService.gameInfo.chosenSet);
   }
 
   getPokemonSets() {
