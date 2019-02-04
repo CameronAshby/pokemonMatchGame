@@ -19,6 +19,7 @@ export class GamepageComponent implements OnInit {
   matchIndexArray: number[] = [];
 
   currentPlayerIndex: number = 0;
+  loserArray: string[] = [];
 
   gameReady: boolean = false;
 
@@ -93,6 +94,8 @@ export class GamepageComponent implements OnInit {
       this.playerInfoService.gameInfo.matchesCount -= 1;
 
       this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] += 5;
+
+      this.currentPlayerIndex -= 1;
     }
     else {
 
@@ -122,6 +125,7 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i].clicked = true;
     }
   }
+
   randomizeCards(){
     for (let i = 0; i < this.cardsArray.length; i++){
       let ran = Math.floor(Math.random() * this.cardsArray.length);
@@ -151,16 +155,34 @@ export class GamepageComponent implements OnInit {
 
     if(typeof winner == 'string') {
       this.playerInfoService.gameInfo.winner = winner;
-      // this.playerInfoService.saveGameToFirebase();
 
       if(this.playerInfoService.gameInfo.winner == this.loginService.playerName) {
         this.playerInfoService.playerInfo.gamesWon += 1;
-        // this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+      }
+      else {
+        this.playerInfoService.playerInfo.gamesLost += 1;
+        this.playerInfoService.playerInfo.playersLostTo.push(winner);
       }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
-      // this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+      for(let i = 0; i < winner.length; i++) {
+        if(winner[i] != this.loginService.playerName) {
+          this.playerInfoService.playerInfo.playersLostTo.push(winner[i]);
+        }
+      }
+    }
+
+    for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
+      if(this.playerInfoService.gameInfo.players[i] != winner) {
+        this.loserArray.push(this.playerInfoService.gameInfo.players[i]);
+      }
+    }
+
+    for(let i = 0; i < this.loserArray.length; i++) {
+      if(this.loserArray[i] != this.loginService.playerName) {
+        this.playerInfoService.playerInfo.playersBeaten.push(this.loserArray[i]);
+      }
     }
   }
 
@@ -176,11 +198,6 @@ export class GamepageComponent implements OnInit {
 
     this.playerInfoService.playerInfo.gamesPlayed += 1;
     this.playerInfoService.playerInfo.score += this.playerInfoService.gameInfo.playerScores[playerIndex];
-    console.log(playerIndex);
-    console.log(this.playerInfoService.playerInfo.score);
-    console.log(this.playerInfoService.gameInfo.playerScores);
-    console.log(this.playerInfoService.gameInfo.playerScores[playerIndex]);
-    console.log(this.playerInfoService.playerInfo.gamesPlayed);
 
     this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
   }
