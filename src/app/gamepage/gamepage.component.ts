@@ -19,6 +19,9 @@ export class GamepageComponent implements OnInit {
   matchIndexArray: number[] = [];
 
   currentPlayerIndex: number = 0;
+  loserArray: string[] = [];
+
+  gameReady: boolean = false;
 
   constructor(
     private pokemonservice: PokemonService,
@@ -37,6 +40,7 @@ export class GamepageComponent implements OnInit {
           this.pokemonservice.pokemonArray = data;
           this.buildCards();
           this.randomizeCards();
+          this.gameReady = true;
         }
       );
   }
@@ -90,6 +94,8 @@ export class GamepageComponent implements OnInit {
       this.playerInfoService.gameInfo.matchesCount -= 1;
 
       this.playerInfoService.gameInfo.playerScores[this.currentPlayerIndex] += 5;
+
+      this.currentPlayerIndex -= 1;
     }
     else {
 
@@ -119,6 +125,7 @@ export class GamepageComponent implements OnInit {
       this.cardsArray[i].clicked = true;
     }
   }
+
   randomizeCards(){
     for (let i = 0; i < this.cardsArray.length; i++){
       let ran = Math.floor(Math.random() * this.cardsArray.length);
@@ -130,6 +137,7 @@ export class GamepageComponent implements OnInit {
 
   viewStats() {
     this.setWinner();
+    this.updatePlayerProfile();
     this.router.navigate(['statsPage']);
   }
 
@@ -139,27 +147,63 @@ export class GamepageComponent implements OnInit {
       if(this.playerInfoService.gameInfo.playerScores[i] > this.playerInfoService.gameInfo.playerScores[i-1]) {
         winner = this.playerInfoService.gameInfo.players[i];
       }
-      else if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+      else {
         winner = [];
-        winner = [this.playerInfoService.gameInfo.players[i-1], this.playerInfoService.gameInfo.players[i]];
+        for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
+          if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+            winner[i-1] = this.playerInfoService.gameInfo.players[i-1];
+          }
+        }
       }
     }
-    console.log(winner);
-    console.log(typeof winner);
+
     if(typeof winner == 'string') {
       this.playerInfoService.gameInfo.winner = winner;
-      this.playerInfoService.saveGameToFirebase();
+
+      if(this.playerInfoService.gameInfo.winner == this.loginService.playerName) {
+        this.playerInfoService.playerInfo.gamesWon += 1;
+      }
+      else {
+        this.playerInfoService.playerInfo.gamesLost += 1;
+        this.playerInfoService.playerInfo.playersLostTo.push(winner);
+      }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
-      this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
+      for(let i = 0; i < winner.length; i++) {
+        if(winner[i] != this.loginService.playerName) {
+          this.playerInfoService.playerInfo.playersLostTo.push(winner[i]);
+        }
+      }
     }
 
-    this.updatePlayerProfile();
+    for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
+      if(this.playerInfoService.gameInfo.players[i] != winner) {
+        this.loserArray.push(this.playerInfoService.gameInfo.players[i]);
+      }
+    }
+
+    for(let i = 0; i < this.loserArray.length; i++) {
+      if(this.loserArray[i] != this.loginService.playerName) {
+        this.playerInfoService.playerInfo.playersBeaten.push(this.loserArray[i]);
+      }
+    }
   }
 
   updatePlayerProfile(){
 
+    let playerIndex: number;
+
+    for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
+      if(this.playerInfoService.gameInfo.players[i] == this.loginService.playerName) {
+        playerIndex = i;
+      }
+    }
+
+    this.playerInfoService.playerInfo.gamesPlayed += 1;
+    this.playerInfoService.playerInfo.score += this.playerInfoService.gameInfo.playerScores[playerIndex];
+
+    this.playerInfoService.saveToFirebase(this.loginService.playerName, this.playerInfoService.playerInfo);
   }
 
 }

@@ -40,34 +40,36 @@ export class WelcomePageComponent implements OnInit {
   }
 
   saveToFirebase() {
-    console.log('need player info');
+    this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(async doc => {
+      this.playerInfoService.playerInfo = await doc.data() as Player;
 
-    if(!this.playerInfo) {
-      this.playerInfoService.saveToFirebase(this.loginService.playerName, {
-        name: this.loginService.playerName,
-        gamesLost: 0,
-        gamesPlayed: 0,
-        gamesWon: 0,
-        gamesTied: 0,
-        playersBeaten: [],
-        playersLostTo: [],
-        score: 0,
-        selected: false
-      })
-    }
-    else {
-      this.playerInfoService.saveToFirebase(this.loginService.playerName, {
-        name: this.loginService.playerName,
-        gamesLost: this.playerInfoService.playerInfo.gamesLost,
-        gamesPlayed: this.playerInfoService.playerInfo.gamesPlayed,
-        gamesWon: this.playerInfoService.playerInfo.gamesWon,
-        gamesTied: this.playerInfoService.playerInfo.gamesTied,
-        playersBeaten: this.playerInfoService.playerInfo.playersBeaten,
-        playersLostTo: this.playerInfoService.playerInfo.playersLostTo,
-        score: this.playerInfoService.playerInfo.score,
-        selected: false
-      })
-    }
+      if(!this.playerInfoService.playerInfo) {
+        this.playerInfoService.saveToFirebase(this.loginService.playerName, {
+          name: this.loginService.playerName,
+          gamesLost: 0,
+          gamesPlayed: 0,
+          gamesWon: 0,
+          gamesTied: 0,
+          playersBeaten: [],
+          playersLostTo: [],
+          score: 0,
+          selected: false
+        })
+      }
+      else {
+        this.playerInfoService.saveToFirebase(this.loginService.playerName, {
+          name: this.loginService.playerName,
+          gamesLost: this.playerInfoService.playerInfo.gamesLost,
+          gamesPlayed: this.playerInfoService.playerInfo.gamesPlayed,
+          gamesWon: this.playerInfoService.playerInfo.gamesWon,
+          gamesTied: this.playerInfoService.playerInfo.gamesTied,
+          playersBeaten: this.playerInfoService.playerInfo.playersBeaten,
+          playersLostTo: this.playerInfoService.playerInfo.playersLostTo,
+          score: this.playerInfoService.playerInfo.score,
+          selected: false
+        })
+      }
+    });
   }
 
   logout() {

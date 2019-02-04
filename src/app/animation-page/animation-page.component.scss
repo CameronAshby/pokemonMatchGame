@@ -6,6 +6,10 @@ body{
   overflow: hidden;
 }
 
+h1 {
+  color: white;
+}
+
 .container{
   height: 100%;
   display: flex;
@@ -21,7 +25,7 @@ body{
   flex-wrap: wrap;
 }
 
-#loading {
+.loading {
   margin: 10px;
   width: 50px;
   height: 50px;

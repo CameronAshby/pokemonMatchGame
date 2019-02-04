@@ -2,8 +2,8 @@
   <mat-card class="welcomeCardContainer">
     <mat-card-title>Welcome to Pokemon Matching {{loginService.playerName}}</mat-card-title>
     <mat-card-content *ngIf="loginService.playerName">
-      <button mat-raised-button (click)="newGame()">Play New Game</button>
-      <button mat-raised-button (click)="viewProfile()">View Stats</button>
+      <button mat-raised-button (click)="saveToFirebase();newGame()">Play New Game</button>
+      <button mat-raised-button (click)="saveToFirebase();viewProfile()">View Stats</button>
     </mat-card-content>
     <app-sign-up *ngIf="!loginService.loggedIn" class="signUpContainer"></app-sign-up>
   </mat-card>
