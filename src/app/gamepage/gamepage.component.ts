@@ -147,9 +147,13 @@ export class GamepageComponent implements OnInit {
       if(this.playerInfoService.gameInfo.playerScores[i] > this.playerInfoService.gameInfo.playerScores[i-1]) {
         winner = this.playerInfoService.gameInfo.players[i];
       }
-      else if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+      else {
         winner = [];
-        winner = [this.playerInfoService.gameInfo.players[i-1], this.playerInfoService.gameInfo.players[i]];
+        for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
+          if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
+            winner[i-1] = this.playerInfoService.gameInfo.players[i-1];
+          }
+        }
       }
     }
 
