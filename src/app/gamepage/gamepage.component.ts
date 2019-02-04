@@ -21,6 +21,7 @@ export class GamepageComponent implements OnInit {
   currentPlayerIndex: number = 0;
   loserArray: string[] = [];
 
+  tie: boolean = false;
   gameReady: boolean = false;
 
   constructor(
@@ -148,13 +149,17 @@ export class GamepageComponent implements OnInit {
         winner = this.playerInfoService.gameInfo.players[i];
       }
       else {
-        winner = [];
+        this.tie = true;
+      }
+    }
+
+    if(this.tie) {
+      winner = [];
         for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
           if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
             winner[i-1] = this.playerInfoService.gameInfo.players[i-1];
           }
         }
-      }
     }
 
     if(typeof winner == 'string') {

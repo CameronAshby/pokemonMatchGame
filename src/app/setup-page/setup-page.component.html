@@ -37,8 +37,8 @@
   <mat-card *ngIf="playerInfoService.gameInfo.matchesCount && playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players && playerInfoService.gameInfo.chosenSet" class="gameInfoContainer">
     <mat-card-title>Verify Game Information</mat-card-title>
     <mat-card-content>Players: <span *ngFor="let gamePlayer of playerInfoService.gameInfo.players; let i = index">{{gamePlayer}}{{i == playerInfoService.gameInfo.players.length - 1 ? '' : ', '}}</span></mat-card-content>
-    <mat-card-content>Matches: {{playerInfoService.gameInfo.matchesCount}}</mat-card-content>
     <mat-card-content>Card Set: {{playerInfoService.gameInfo.chosenSet}}</mat-card-content>
+    <mat-card-content>Matches: {{playerInfoService.gameInfo.matchesCount}}</mat-card-content>
     <button
       mat-raised-button color="primary"
       (click)="saveGameToFirebase(); gameStart()"
