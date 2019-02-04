@@ -22,6 +22,7 @@ export class PlayerInfoService {
     players: [],
     playerScores: [],
     matchesCount: 0,
+    chosenSet: '',
     winner: ''
   };
 
@@ -67,6 +68,7 @@ export class PlayerInfoService {
       players: [],
       playerScores: [],
       matchesCount: 0,
+      chosenSet: '',
       winner:''
     };
     this.afs.collection('gameInfo').doc('CurrentGame').delete();

@@ -31,7 +31,7 @@ export class SetupPageComponent implements OnInit {
       private playerInfoService: PlayerInfoService,
       private afs: AngularFirestore,
       private router: Router,
-      private pokemonService: PokemonService
+      private pokemonService: PokemonService,
   ) {
 
     if(!this.loginService.loggedIn) {
@@ -49,6 +49,10 @@ export class SetupPageComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.pokemonService.getPokemonSets()
+      .then(data => {
+        this.pokemonService.pokemonSets = data;
+      });
   }
 
   saveGameToFirebase() {
