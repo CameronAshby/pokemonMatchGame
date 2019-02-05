@@ -174,14 +174,14 @@ export class GamepageComponent implements OnInit {
       }
       else {
         this.playerInfoService.playerInfo.gamesLost += 1;
-        this.playerInfoService.playerInfo.playersLostTo.push(winner);
+        this.playerInfoService.playerInfo.playersLostTo.push(winner + ' ');
       }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
       for(let i = 0; i < winner.length; i++) {
         if(winner[i] != this.loginService.playerName) {
-          this.playerInfoService.playerInfo.playersLostTo.push(winner[i]);
+          this.playerInfoService.playerInfo.playersLostTo.push(winner[i] + ' ');
         }
       }
     }
@@ -194,7 +194,7 @@ export class GamepageComponent implements OnInit {
 
     for(let i = 0; i < this.loserArray.length; i++) {
       if(this.loserArray[i] != this.loginService.playerName) {
-        this.playerInfoService.playerInfo.playersBeaten.push(this.loserArray[i]);
+        this.playerInfoService.playerInfo.playersBeaten.push(this.loserArray[i] + ' ');
       }
     }
   }
