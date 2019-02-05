@@ -1,15 +1,29 @@
+*{
+  font-family: 'Luckiest Guy', cursive;
+}
+
 .welcomePageContainer {
   background-image: url("../../assets/images/pokemonBackground.jpeg");
   background-size: cover;
   height: 100%;
   width: 100%;
-
+  padding-top: 100px;
   display: flex;
   flex-direction: column;
+  align-content: center;
+
+}
+.welcometitle{
+  text-align: center;
+  font-size: 3rem;
 }
 
 .welcomeCardContainer {
   display: flex;
+  width: 50%;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
   flex-direction: column;
 }
 

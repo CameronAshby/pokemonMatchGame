@@ -1,0 +1,11 @@
+.statscontainer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.statscard{
+  display: inline-block;
+  border: 1px solid black;
+}
