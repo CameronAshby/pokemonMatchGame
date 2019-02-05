@@ -3,6 +3,7 @@
   <button (click)="showAll()">Show All</button>
   <div>Current Player Turn: {{currentPlayerIndex + 1}}</div>
   <div>Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
+  <div>Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
   <button *ngIf="playerInfoService.gameInfo.matchesCount == 0" (click)="viewStats()">View Stats</button>
   <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
     <div>Player {{i+1}} Info</div>

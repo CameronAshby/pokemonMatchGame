@@ -118,6 +118,7 @@ export class GamepageComponent implements OnInit {
 
     if(this.currentPlayerIndex == this.playerInfoService.gameInfo.playerCount) {
       this.currentPlayerIndex = 0;
+      this.playerInfoService.gameInfo.roundCount += 1;
     }
   }
 
@@ -149,7 +150,12 @@ export class GamepageComponent implements OnInit {
         winner = this.playerInfoService.gameInfo.players[i];
       }
       else {
-        this.tie = true;
+        let checkArray = arr => arr.every( v => v === arr[0] );
+        checkArray( this.playerInfoService.gameInfo.playerScores );
+        console.log(checkArray( this.playerInfoService.gameInfo.playerScores ));
+        if(checkArray( this.playerInfoService.gameInfo.playerScores )) {
+          this.tie = true;
+        }
       }
     }
 
