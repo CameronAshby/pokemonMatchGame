@@ -17,6 +17,7 @@ export class GamepageComponent implements OnInit {
 
   matchArray: Card[] = [];
   matchIndexArray: number[] = [];
+  disableClicking: boolean = false;
 
   currentPlayerIndex: number = 0;
   loserArray: string[] = [];
@@ -72,6 +73,23 @@ export class GamepageComponent implements OnInit {
     this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount));
   }
 
+  checkDisable() {
+    console.log(this.matchArray);
+    if(this.matchArray.length == 2) {
+      this.disableClicking = true;
+    }
+    else if(this.matchArray.length > 2) {
+      for(let i = 0; i < this.matchArray.length; i++) {
+        this.matchArray[i].clicked = false;
+        this.disableClicking = false;
+      }
+      this.matchArray = [];
+    }
+    else {
+      this.disableClicking = false;
+    }
+  }
+
   toggleClicked(index: number, playerCard: Card) {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
@@ -79,6 +97,7 @@ export class GamepageComponent implements OnInit {
     setTimeout(()=>{
       if(this.matchArray.length == 2) {
         this.checkMatch();
+        this.disableClicking = false;
       }}, 2000);
   }
 
@@ -174,14 +193,14 @@ export class GamepageComponent implements OnInit {
       }
       else {
         this.playerInfoService.playerInfo.gamesLost += 1;
-        this.playerInfoService.playerInfo.playersLostTo.push(winner + ' ');
+        this.playerInfoService.playerInfo.playersLostTo.push(' ' + winner);
       }
     }
     else {
       this.playerInfoService.playerInfo.gamesTied += 1;
       for(let i = 0; i < winner.length; i++) {
         if(winner[i] != this.loginService.playerName) {
-          this.playerInfoService.playerInfo.playersLostTo.push(winner[i] + ' ');
+          this.playerInfoService.playerInfo.playersLostTo.push(' ' + winner[i]);
         }
       }
     }
@@ -194,7 +213,7 @@ export class GamepageComponent implements OnInit {
 
     for(let i = 0; i < this.loserArray.length; i++) {
       if(this.loserArray[i] != this.loginService.playerName) {
-        this.playerInfoService.playerInfo.playersBeaten.push(this.loserArray[i] + ' ');
+        this.playerInfoService.playerInfo.playersBeaten.push(' ' + this.loserArray[i]);
       }
     }
   }
