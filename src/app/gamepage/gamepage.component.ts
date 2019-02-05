@@ -36,14 +36,13 @@ export class GamepageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.pokemonservice.getPokemon()
-      .then(data => {
-          this.pokemonservice.pokemonArray = data;
-          this.buildCards();
-          this.randomizeCards();
-          this.gameReady = true;
-        }
-      );
+    this.pokemonservice.getPokemonSetCards()
+      .subscribe(data => {
+        this.pokemonservice.pokemonArray = data['cards'];
+        this.buildCards();
+        this.randomizeCards();
+        this.gameReady = true;
+      });
   }
 
   buildCards() {
@@ -152,7 +151,6 @@ export class GamepageComponent implements OnInit {
       else {
         let checkArray = arr => arr.every( v => v === arr[0] );
         checkArray( this.playerInfoService.gameInfo.playerScores );
-        console.log(checkArray( this.playerInfoService.gameInfo.playerScores ));
         if(checkArray( this.playerInfoService.gameInfo.playerScores )) {
           this.tie = true;
         }
