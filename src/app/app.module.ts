@@ -60,7 +60,8 @@ import { AnimationPageComponent } from './animation-page/animation-page.componen
     MatExpansionModule,
     MatSelectModule,
     MatTableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
