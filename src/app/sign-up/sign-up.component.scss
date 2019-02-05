@@ -3,5 +3,16 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 100%;
+}
+
+.loginprompt {
+  font-family: 'Luckiest Guy', cursive;
+}
+
+.contentContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
