@@ -8,11 +8,16 @@
 }
 
 .statscard{
+  width: 60%;
   font-size: 2rem;
-  display: inline-block;
   font-family: 'Luckiest Guy', cursive;
   border: none;
 }
 .playername{
   margin-bottom: 5px;
+}
+
+.namewrap{
+  display: flex;
+  flex-wrap: wrap;
 }
