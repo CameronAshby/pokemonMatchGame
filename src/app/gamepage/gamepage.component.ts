@@ -21,6 +21,7 @@ export class GamepageComponent implements OnInit {
   currentPlayerIndex: number = 0;
   loserArray: string[] = [];
 
+  tie: boolean = false;
   gameReady: boolean = false;
 
   constructor(
@@ -69,7 +70,7 @@ export class GamepageComponent implements OnInit {
   }
 
   getRandomCard() {
-    this.randomCardIndex = Math.floor((Math.random() * 999));
+    this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount));
   }
 
   toggleClicked(index: number, playerCard: Card) {
@@ -117,6 +118,7 @@ export class GamepageComponent implements OnInit {
 
     if(this.currentPlayerIndex == this.playerInfoService.gameInfo.playerCount) {
       this.currentPlayerIndex = 0;
+      this.playerInfoService.gameInfo.roundCount += 1;
     }
   }
 
@@ -148,13 +150,22 @@ export class GamepageComponent implements OnInit {
         winner = this.playerInfoService.gameInfo.players[i];
       }
       else {
-        winner = [];
+        let checkArray = arr => arr.every( v => v === arr[0] );
+        checkArray( this.playerInfoService.gameInfo.playerScores );
+        console.log(checkArray( this.playerInfoService.gameInfo.playerScores ));
+        if(checkArray( this.playerInfoService.gameInfo.playerScores )) {
+          this.tie = true;
+        }
+      }
+    }
+
+    if(this.tie) {
+      winner = [];
         for(let i = 1; i < this.playerInfoService.gameInfo.players.length; i++) {
           if(this.playerInfoService.gameInfo.playerScores[i] == this.playerInfoService.gameInfo.playerScores[i-1]) {
             winner[i-1] = this.playerInfoService.gameInfo.players[i-1];
           }
         }
-      }
     }
 
     if(typeof winner == 'string') {
