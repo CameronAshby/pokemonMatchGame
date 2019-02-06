@@ -1,3 +1,5 @@
+$mewTwo-blue: #2453A6;
+
 .signInContainer {
   display: flex;
   flex-direction: column;
@@ -7,7 +9,7 @@
 }
 
 .loginprompt {
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Merienda', cursive;
 }
 
 .contentContainer{
@@ -15,4 +17,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.signinbutton {
+  font-family: 'Merienda', cursive;
 }

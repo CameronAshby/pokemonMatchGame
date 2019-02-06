@@ -105,7 +105,6 @@ export class GamepageComponent implements OnInit {
 
   checkMatch() {
     if(this.matchArray[0].uniqueId == this.matchArray[1].uniqueId) {
-      console.log('nice try');
       this.matchArray[0].clicked = false;
       this.matchArray[1].clicked = false;
 
