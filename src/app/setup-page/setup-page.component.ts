@@ -33,6 +33,7 @@ export class SetupPageComponent implements OnInit {
       private router: Router,
       private pokemonService: PokemonService,
   ) {
+    this.pokemonService.pokemonSelectedSet = null;
 
     if(!this.loginService.loggedIn) {
       this.router.navigate(['welcomePage']);
@@ -86,6 +87,7 @@ export class SetupPageComponent implements OnInit {
 
   resetPage() {
     this.disablePlayers = false;
+    this.pokemonService.pokemonSelectedSet = null;
     this.playerInfoService.clearCurrentGame();
     this.router.navigate(['setupPage']);
   }
