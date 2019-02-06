@@ -54,7 +54,8 @@ export class GamepageComponent implements OnInit {
         image: this.pokemonservice.pokemonArray[this.randomCardIndex].imageUrl,
         matchId: i+1,
         clicked: false,
-        matched: false
+        matched: false,
+        uniqueId: i
       };
     }
 
@@ -64,7 +65,8 @@ export class GamepageComponent implements OnInit {
         image: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].image,
         matchId: this.cardsArray[i-this.playerInfoService.gameInfo.matchesCount].matchId,
         clicked: false,
-        matched: false
+        matched: false,
+        uniqueId: i
       }
     }
   }
@@ -102,7 +104,17 @@ export class GamepageComponent implements OnInit {
   }
 
   checkMatch() {
-    if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
+    if(this.matchArray[0].uniqueId == this.matchArray[1].uniqueId) {
+      console.log('nice try');
+      this.matchArray[0].clicked = false;
+      this.matchArray[1].clicked = false;
+
+      this.matchArray = [];
+      this.matchIndexArray = [];
+
+      this.currentPlayerIndex -= 1;
+    }
+    else if(this.matchArray[0].matchId == this.matchArray[1].matchId || this.matchArray[0].cardId == this.matchArray[1].cardId) {
 
       this.cardsArray[this.matchIndexArray[0]].matched = true;
       this.cardsArray[this.matchIndexArray[1]].matched = true;

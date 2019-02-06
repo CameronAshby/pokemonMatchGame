@@ -4,4 +4,5 @@ export interface Card {
   matchId: number;
   clicked: boolean;
   matched: boolean;
+  uniqueId: number;
 }
