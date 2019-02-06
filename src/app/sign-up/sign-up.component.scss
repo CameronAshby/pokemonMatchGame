@@ -5,7 +5,6 @@ $mewTwo-blue: #2453A6;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
 }
 
 .loginprompt {
@@ -21,4 +20,10 @@ $mewTwo-blue: #2453A6;
 
 .signinbutton {
   font-family: 'Merienda', cursive;
+}
+
+@media only screen and (max-width: 800px) {
+  .loginprompt {
+    font-size: 18px;
+  }
 }

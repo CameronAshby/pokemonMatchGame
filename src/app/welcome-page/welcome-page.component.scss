@@ -18,7 +18,7 @@ $mewTwo-blue: #2453A6;
 .welcometitle{
   color: $text-color;
   text-align: center;
-  font-size: 2rem;
+  font-size: 30px;
   width: 80%;
 }
 
@@ -39,4 +39,29 @@ $mewTwo-blue: #2453A6;
   width: 65%;
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (max-width: 950px) {
+  .buttonContainer {
+    display: flex;
+    flex-direction: column;
+  }
+
+  button {
+    margin-bottom: 10px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .welcomePageContainer {
+    background-image: url('../../assets/images/mewTwoSmall.png');
+    background-size: cover;
+  }
+  .welcomeCardContainer {
+    width: 70%;
+    opacity: 0.9;
+  }
+  .welcometitle {
+    font-size: 18px;
+  }
 }
