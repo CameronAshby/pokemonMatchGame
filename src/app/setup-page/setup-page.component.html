@@ -5,11 +5,11 @@
 <div class="gamesetup">
 <mat-card class="setup">
   <mat-card-content>
-    <div>
+    <mat-card-title class="playerName">
       Player Name: {{loginService.playerName}}
-    </div>
-    <div>
-      Amount of Players
+    </mat-card-title>
+    <div class="infoContainer">
+      <div class="infoTitle">Amount of Players</div>
       <mat-select placeholder="Select Amount of Players" [(ngModel)]="playerInfoService.gameInfo.playerCount" (selectionChange)="buildMatches()">
         <mat-option [value]=1>1</mat-option>
         <mat-option [value]=2>2</mat-option>
@@ -17,22 +17,22 @@
         <mat-option [value]=4>4</mat-option>
       </mat-select>
     </div>
-    <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.playerCount != 1">
-      <p>Select {{playerInfoService.gameInfo.playerCount-1}} Other Player(s) To Play Against</p>
+    <div class="infoContainer" *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.playerCount != 1">
+      <div class="infoTitle">Select {{playerInfoService.gameInfo.playerCount-1}} Other Player(s) To Play Against</div>
       <mat-form-field>
-        <mat-select placeholder="Select Other Players" [formControl]="players" (selectionChange)="checkPlayers()" multiple [(ngModel)]="playerInfoService.gameInfo.players">
+        <mat-select [formControl]="players" (selectionChange)="checkPlayers()" multiple [(ngModel)]="playerInfoService.gameInfo.players">
           <mat-option *ngFor="let player of previousPlayers" (change)="!player.selected" [disabled]="player.selected || disablePlayers" [value]="player.name">{{player.name}}</mat-option>
         </mat-select>
       </mat-form-field>
     </div>
-    <div *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players">
-      Card Set to Play With
+    <div class="infoContainer" *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players">
+      <div class="infoTitle">Card Set to Play With</div>
       <mat-select placeholder="Select Set to Play" [(ngModel)]="pokemonService.pokemonSelectedSet">
         <mat-option [value]="set" *ngFor="let set of pokemonService.pokemonSets">{{set.name}}</mat-option>
       </mat-select>
     </div>
-    <div *ngIf="pokemonService.pokemonSelectedSet != null">
-      Number of Matches To Be Found
+    <div class="infoContainer" *ngIf="pokemonService.pokemonSelectedSet != null">
+      <div class="infoTitle">Number of Matches To Be Found</div>
       <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
         <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
         <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
@@ -48,7 +48,7 @@
       mat-raised-button color="primary"
       (click)="saveGameToFirebase(); gameStart()"
     >Start Game</button>
-    <button mat-raised-button (click)="resetPage()">Reset Setup</button>
+    <button mat-raised-button color="accent" (click)="resetPage()">Reset Setup</button>
   </mat-card>
 </mat-card>
 </div>
