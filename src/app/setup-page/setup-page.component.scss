@@ -21,7 +21,7 @@ $text-color: #5B6063;
 }
 
 .setup{
-  width: 30%;
+  width: 60%;
 }
 
 .infoContainer {
@@ -31,4 +31,14 @@ $text-color: #5B6063;
 .infoTitle {
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .setup {
+    width: 80%;
+    opacity: 0.9;
+  }
+  .playerName {
+    font-size: 22px;
+  }
 }
