@@ -74,7 +74,6 @@ export class GamepageComponent implements OnInit {
   }
 
   checkDisable() {
-    console.log(this.matchArray);
     if(this.matchArray.length == 2) {
       this.disableClicking = true;
     }
@@ -99,6 +98,7 @@ export class GamepageComponent implements OnInit {
         this.checkMatch();
         this.disableClicking = false;
       }}, 2000);
+    this.checkDisable();
   }
 
   checkMatch() {
