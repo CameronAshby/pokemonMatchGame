@@ -1,12 +1,13 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Audiowide|Bangers|Boogaloo|Concert+One|Luckiest+Guy|Press+Start+2P|Sigmar+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
 </head>
 <div class="welcomePageContainer">
   <mat-card class="welcomeCardContainer">
-    <mat-card-title class="welcometitle">Welcome to Pokemon Matching {{loginService.playerName}}</mat-card-title>
-    <mat-card-content *ngIf="loginService.playerName">
-      <button mat-raised-button (click)="saveToFirebase();newGame()">Play New Game</button>
-      <button mat-raised-button (click)="saveToFirebase();viewProfile()">View Stats</button>
+    <mat-card-title class="welcometitle">Welcome to Pokemon Matching <span class="nameSpan">{{loginService.playerName}}</span></mat-card-title>
+    <mat-card-content class="buttonContainer" *ngIf="loginService.playerName">
+      <button color="primary" mat-raised-button (click)="saveToFirebase();newGame()">Play New Game</button>
+      <button color="primary" mat-raised-button (click)="saveToFirebase();viewProfile()">View Stats</button>
     </mat-card-content>
     <app-sign-up *ngIf="!loginService.loggedIn" class="signUpContainer"></app-sign-up>
   </mat-card>

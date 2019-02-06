@@ -1,33 +1,42 @@
+$text-color: #5B6063;
+$mewTwo-blue: #2453A6;
+
 *{
-  font-family: 'Luckiest Guy', cursive;
+  font-family: 'Merienda', cursive;
 }
 
 .welcomePageContainer {
-  background-image: url("../../assets/images/pokemonBackground.jpeg");
+  background-image: url("../../assets/images/mewTwo.png");
   background-size: cover;
   height: 100%;
   width: 100%;
-  padding-top: 100px;
   display: flex;
-  flex-direction: column;
-  align-content: center;
-
+  align-items: center;
+  justify-content: center;
 }
+
 .welcometitle{
+  color: $text-color;
   text-align: center;
-  font-size: 3rem;
+  font-size: 2rem;
+  width: 80%;
+}
+
+.nameSpan {
+  color: black;
 }
 
 .welcomeCardContainer {
+  width: 40%;
+  height: auto;
   display: flex;
-  width: 50%;
-  margin: 0 auto;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
 }
 
-.signUpContainer {
+.buttonContainer {
+  width: 65%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }

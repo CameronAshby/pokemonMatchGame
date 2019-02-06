@@ -1,10 +1,13 @@
 <head>
   <link href="https://fonts.googleapis.com/css?family=Audiowide|Bangers|Boogaloo|Concert+One|Luckiest+Guy|Press+Start+2P|Sigmar+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
 </head>
-<mat-toolbar color="accent" class="appToolbar">
+<mat-toolbar color="primary" class="appToolbar">
   <mat-icon class="homeIcon" (click)="homePage()">home</mat-icon>
-  <button *ngIf="!loginService.loggedIn" mat-button (click)="loginWithGoogle()">Sign In</button>
-  <button *ngIf="loginService.loggedIn" mat-button (click)="logout()">Sign Out</button>
+  <div class="buttonContainer">
+    <button class="btn" *ngIf="!loginService.loggedIn" mat-button (click)="loginWithGoogle()">Sign In</button>
+    <button class="btn" *ngIf="loginService.loggedIn" mat-button (click)="logout()">Sign Out</button>
+  </div>
 </mat-toolbar>
 <router-outlet></router-outlet>
 
