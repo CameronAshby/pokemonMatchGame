@@ -27,6 +27,7 @@ import { SetupPageComponent } from './setup-page/setup-page.component';
 import {HttpClientModule} from '@angular/common/http';
 import { GamepageComponent } from './gamepage/gamepage.component';
 import {PokemonTCG} from "pokemon-tcg-sdk-typescript";
+import { AnimationPageComponent } from './animation-page/animation-page.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import {PokemonTCG} from "pokemon-tcg-sdk-typescript";
     StatspageComponent,
     SetupPageComponent,
     GamepageComponent,
+    AnimationPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -58,7 +60,8 @@ import {PokemonTCG} from "pokemon-tcg-sdk-typescript";
     MatExpansionModule,
     MatSelectModule,
     MatTableModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

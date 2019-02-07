@@ -1,12 +1,28 @@
-<button (click)="showAll()">Show All</button>
-<button *ngIf="playerInfoService.gameInfo.matchesCount == 0" (click)="viewStats()">View Stats</button>
-<div>
-  Player Info Stuff
-</div>
-<div class="maincontainer">
-  <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
-    <mat-card class="cards">
-      <img [style.display]="cards.matched ? 'none' : 'flex'" (click)="toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
-    </mat-card>
+<head>
+  <link href="https://fonts.googleapis.com/css?family=Audiowide|Bangers|Boogaloo|Concert+One|Luckiest+Guy|Press+Start+2P|Sigmar+One" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
+</head>
+<app-animation-page *ngIf="!gameReady"></app-animation-page>
+<div *ngIf="gameReady">
+  <button (click)="showAll()">Show All</button>
+  <div class="gameinfo">
+  <div class="gameinfos">Current Player Turn: {{currentPlayerIndex + 1}}</div>
+  <div class="gameinfos">Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
+  <div class="gameinfos">Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
+  </div>
+  <button *ngIf="playerInfoService.gameInfo.matchesCount == 0" (click)="viewStats()">View Stats</button>
+  <div class="playerinfos">
+  <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
+    <div>Player {{i+1}} Info</div>
+    <div>{{player}}</div>
+    <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
+  </mat-card>
+  </div>
+  <div class="maincontainer">
+    <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
+      <mat-card class="cards">
+        <img [class.disabled]="disableClicking" [style.display]="cards.matched ? 'none' : 'flex'" (click)="checkDisable();toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
+      </mat-card>
+    </div>
   </div>
 </div>

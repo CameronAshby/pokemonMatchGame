@@ -1,7 +1,30 @@
+$mewTwo-blue: #2453A6;
+
 .signInContainer {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+}
+
+.loginprompt {
+  font-family: 'Merienda', cursive;
+  text-align: center;
+}
+
+.contentContainer{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.signinbutton {
+  font-family: 'Merienda', cursive;
+}
+
+@media only screen and (max-width: 800px) {
+  .loginprompt {
+    font-size: 18px;
+  }
 }

@@ -1,0 +1,50 @@
+$text-color: #5B6063;
+
+* {
+  font-family: 'Merienda', cursive;
+}
+
+.gamesetup{
+  width: 100%;
+  height: 100%;
+  background-image: url("../../assets/images/pokemonBackground3.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.playerName {
+  color: $text-color;
+  font-size: 30px;
+}
+
+.setup{
+  width: 60%;
+}
+
+.infoContainer {
+  margin-bottom: 20px;
+}
+
+.infoTitle {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .setup {
+    width: 80%;
+    opacity: 0.9;
+  }
+  .playerName {
+    font-size: 22px;
+  }
+  .infoTitle {
+    font-size: 12px;
+  }
+  .infoContainer {
+    margin-bottom: 10px;
+  }
+}

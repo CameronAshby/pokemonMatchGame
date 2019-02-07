@@ -1,4 +1,68 @@
+$mewTwo-blue: (
+  50: #2453A6,
+  100: #2453A6,
+  200: #2453A6,
+  300: #2453A6,
+  400: #2453A6,
+  500: #2453A6,
+  600: #2453A6,
+  700: #2453A6,
+  800: #2453A6,
+  900: #2453A6,
+  A100: #2453A6,
+  A200: #2453A6,
+  A400: #2453A6,
+  A700: #2453A6,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
 
+$text-color: (
+  50: #5B6063,
+  100: #5B6063,
+  200: #5B6063,
+  300: #5B6063,
+  400: #5B6063,
+  500: #5B6063,
+  600: #5B6063,
+  700: #5B6063,
+  800: #5B6063,
+  900: #5B6063,
+  A100: #5B6063,
+  A200: #5B6063,
+  A400: #5B6063,
+  A700: #5B6063,
+  contrast: (
+    50: white,
+    100: white,
+    200: white,
+    300: white,
+    400: white,
+    500: white,
+    600: white,
+    700: white,
+    800: white,
+    900: white,
+    A100: white,
+    A200: white,
+    A400: white,
+    A700: white,
+  )
+);
 // Custom Theming for Angular Material
 // For more information: https://material.angular.io/guide/theming
 @import '~@angular/material/theming';
@@ -12,8 +76,8 @@
 // Define the palettes for your theme using the Material Design palettes available in palette.scss
 // (imported above). For each palette, you can optionally specify a default, lighter, and darker
 // hue. Available color palettes: https://material.io/design/color/
-$Project5-PokemonMatchGame-primary: mat-palette($mat-blue);
-$Project5-PokemonMatchGame-accent: mat-palette($mat-indigo, A200, A100, A400);
+$Project5-PokemonMatchGame-primary: mat-palette($mewTwo-blue, A200, A100, A400);
+$Project5-PokemonMatchGame-accent: mat-palette($text-color, A200, A100, A400);
 
 // The warn palette is optional (defaults to red).
 $Project5-PokemonMatchGame-warn: mat-palette($mat-red);

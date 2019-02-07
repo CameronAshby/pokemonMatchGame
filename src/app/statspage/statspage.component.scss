@@ -1,0 +1,65 @@
+$text-color: #5B6063;
+$mewTwo-blue: #2453A6;
+
+.statscontainer{
+  background-image: url("../../assets/images/blastoise.jpg");
+  background-size: cover;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.statscard{
+  width: 80%;
+  color: $text-color;
+  font-family: 'Merienda', cursive;
+  border: none;
+}
+
+.statsCardContainer {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
+.playername{
+  margin-bottom: 5px;
+}
+
+.namewrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.infoName, .playername {
+  color: #294E64;
+}
+
+mat-card-content {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+@media only screen and (max-width: 1000px) {
+  mat-card-content {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (max-width: 800px) {
+  .statscontainer {
+    background-image: url('../../assets/images/blastoise2.jpg');
+    justify-content: center;
+  }
+  .statsCardContainer {
+    width: 85%;
+  }
+  .statscard {
+    opacity: 0.8;
+  }
+  mat-card-content {
+    font-size: 12px;
+  }
+}
