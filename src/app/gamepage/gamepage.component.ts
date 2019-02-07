@@ -72,7 +72,7 @@ export class GamepageComponent implements OnInit {
   }
 
   getRandomCard() {
-    this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount));
+    this.randomCardIndex = Math.floor((Math.random() * (this.pokemonservice.pokemonSetCardCount - 1)));
   }
 
   checkDisable() {
@@ -95,11 +95,12 @@ export class GamepageComponent implements OnInit {
     this.cardsArray[index].clicked = true;
     this.matchArray.push(playerCard);
     this.matchIndexArray.push(index);
-    setTimeout(()=>{
-      if(this.matchArray.length == 2) {
+    if(this.matchArray.length == 2) {
+      setTimeout(() => {
         this.checkMatch();
         this.disableClicking = false;
-      }}, 2000);
+      }, 2000);
+    }
     this.checkDisable();
   }
 
