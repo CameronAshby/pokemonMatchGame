@@ -1,4 +1,13 @@
+$blastoise-blue: #294E64;
+$mewTwo-blue: #2453A6;
+$text-color: #5B6063;
+
+* {
+  font-family: 'Merienda', cursive;
+}
+
 .mainmaincontainer{
+  width: 90%;
   display: flex;
   justify-content: center;
 }
@@ -22,14 +31,19 @@
 }
 
 .gameinfo{
-  width: 60%;
+  width: 80%;
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin: 20px 0;
 }
 
 .gameinfos{
   margin-right: 10px;
+}
+
+.playerCard {
+  margin: 5px;
 }
 
 .cards {
@@ -50,14 +64,62 @@
 }
 
 .mainInfoContainer {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
+.buttonContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.infoText {
+  color: black;
+}
+
+.dataText {
+  color: $text-color;
+}
+
+.playerName {
+  color: $mewTwo-blue;
+}
+
+
+.gameStatsContainer, .buttonContainer {
+  width: 23%;
+}
+
+.playerinfos {
+  width: 50%;
+}
+
 @media only screen and (max-width: 800px){
   .cardcontainer{
     width: 22%;
+  }
+  .gameinfo {
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .mainmaincontainer {
+    width: 100%;
+  }
+  .maincontainer {
+    width: 90%;
+  }
+  .gameinfo {
+    flex-direction: column;
+  }
+  .gameStatsContainer, .buttonContainer, .playerinfos {
+    width: 80%;
+  }
+  .gameStatsContainer, .playerinfos {
+    margin-bottom: 10px;
   }
 }

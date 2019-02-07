@@ -5,20 +5,19 @@
 <app-animation-page *ngIf="!gameReady"></app-animation-page>
 <div class="mainInfoContainer" *ngIf="gameReady">
   <mat-card class="gameinfo">
-    <div>
-      <div class="gameinfos">Current Player Turn: {{currentPlayerIndex + 1}}</div>
-      <div class="gameinfos">Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
-      <div class="gameinfos">Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
+    <div class="gameStatsContainer">
+      <div class="gameinfos"><span class="infoText">Current Player Turn: </span> <span class="dataText">{{currentPlayerIndex + 1}}</span></div>
+      <div class="gameinfos"><span class="infoText">Matches Left: </span> <span class="dataText">{{playerInfoService.gameInfo.matchesCount}}</span></div>
+      <div class="gameinfos"><span class="infoText">Rounds {{playerInfoService.gameInfo.playerCount == 1 ? 'Left' : 'Played'}}: </span> <span class="dataText">{{playerInfoService.gameInfo.roundCount}}</span></div>
     </div>
     <div class="playerinfos">
-      <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
-        <div>Player {{i+1}} Info</div>
-        <div>{{player}}</div>
-        <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
+      <mat-card class="playerCard" *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
+        <div class="playerName">{{player}}</div>
+        <div><span class="infoText">Score: </span> <span class="dataText">{{playerInfoService.gameInfo.playerScores[i]}}</span></div>
       </mat-card>
     </div>
-    <div>
-      <button mat-raised-button color="primary" (click)="showAll()">Show All</button>
+    <div class="buttonContainer">
+      <!--<button mat-raised-button color="primary" (click)="showAll()">Show All</button>-->
       <button mat-raised-button color="primary" *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)" (click)="viewStats()">View Stats</button>
     </div>
   </mat-card>
@@ -31,4 +30,7 @@
       </div>
     </div>
   </div>
+  <mat-card *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
+    Game Over
+  </mat-card>
 </div>

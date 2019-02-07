@@ -74,10 +74,6 @@ export class SetupPageComponent implements OnInit {
       this.smallMatches = 4;
       this.largeMatches = 8;
     }
-    else if(this.playerInfoService.gameInfo.playerCount == 3) {
-      this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
-      this.largeMatches = 8;
-    }
     else {
       this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
       this.largeMatches = this.playerInfoService.gameInfo.playerCount * 4;
