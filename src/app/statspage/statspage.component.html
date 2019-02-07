@@ -3,14 +3,16 @@
   <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
 </head>
 <div class="statscontainer">
-  <mat-card class="statscard">
-    <mat-card-title class="playername">{{loginService?.playerName}}'s Stats:</mat-card-title>
-    <mat-card-content><span class="infoName">Games Lost:</span> {{playerInfoService.playerInfo?.gamesLost}}</mat-card-content>
-    <mat-card-content><span class="infoName">Games Played:</span> {{playerInfoService.playerInfo?.gamesPlayed}}</mat-card-content>
-    <mat-card-content><span class="infoName">Games Won:</span> {{playerInfoService.playerInfo?.gamesWon}}</mat-card-content>
-    <mat-card-content><span class="infoName">Games Tied:</span> {{playerInfoService.playerInfo?.gamesTied}}</mat-card-content>
-    <mat-card-content class="namewrap"><span class="infoName">Players Beaten:</span> {{playerInfoService.playerInfo?.playersBeaten}}</mat-card-content>
-    <mat-card-content class="namewrap"><span class="infoName">Players Lost To:</span> {{playerInfoService.playerInfo?.playersLostTo}}</mat-card-content>
-    <mat-card-content><span class="infoName">Score:</span> {{playerInfoService.playerInfo?.score}}</mat-card-content>
-  </mat-card>
+  <div class="statsCardContainer">
+    <mat-card class="statscard">
+      <mat-card-title class="playername">{{loginService?.playerName}}'s Stats:</mat-card-title>
+      <mat-card-content><span class="infoName">Games Lost:</span> {{playerInfoService.playerInfo?.gamesLost}}</mat-card-content>
+      <mat-card-content><span class="infoName">Games Played:</span> {{playerInfoService.playerInfo?.gamesPlayed}}</mat-card-content>
+      <mat-card-content><span class="infoName">Games Won:</span> {{playerInfoService.playerInfo?.gamesWon}}</mat-card-content>
+      <mat-card-content><span class="infoName">Games Tied:</span> {{playerInfoService.playerInfo?.gamesTied}}</mat-card-content>
+      <mat-card-content class="namewrap"><span class="infoName">Players Beaten:</span> {{playerInfoService.playerInfo?.playersBeaten}}</mat-card-content>
+      <mat-card-content class="namewrap"><span class="infoName">Players Lost To:</span> {{playerInfoService.playerInfo?.playersLostTo}}</mat-card-content>
+      <mat-card-content><span class="infoName">Score:</span> {{playerInfoService.playerInfo?.score}}</mat-card-content>
+    </mat-card>
+  </div>
 </div>
