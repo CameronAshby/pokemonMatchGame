@@ -12,11 +12,18 @@ $mewTwo-blue: #2453A6;
 }
 
 .statscard{
-  width: 37%;
+  width: 80%;
   color: $text-color;
   font-family: 'Merienda', cursive;
   border: none;
 }
+
+.statsCardContainer {
+  width: 60%;
+  display: flex;
+  justify-content: center;
+}
+
 .playername{
   margin-bottom: 5px;
 }
@@ -28,10 +35,6 @@ $mewTwo-blue: #2453A6;
 
 .infoName, .playername {
   color: #294E64;
-}
-
-mat-card {
-  margin-left: 30px;
 }
 
 mat-card-content {
@@ -46,15 +49,14 @@ mat-card-content {
 }
 
 @media only screen and (max-width: 800px) {
-  mat-card {
-    margin-left: 0;
-  }
   .statscontainer {
     background-image: url('../../assets/images/blastoise2.jpg');
     justify-content: center;
   }
+  .statsCardContainer {
+    width: 85%;
+  }
   .statscard {
-    width: 75%;
     opacity: 0.8;
   }
   mat-card-content {

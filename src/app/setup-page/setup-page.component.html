@@ -6,7 +6,7 @@
 <mat-card class="setup">
   <mat-card-content>
     <mat-card-title class="playerName">
-      Player Name: {{loginService.playerName}}
+      {{loginService.playerName}}
     </mat-card-title>
     <div class="infoContainer">
       <div class="infoTitle">Amount of Players</div>
@@ -48,7 +48,7 @@
       mat-raised-button color="primary"
       (click)="saveGameToFirebase(); gameStart()"
     >Start Game</button>
-    <button mat-raised-button color="accent" (click)="resetPage()">Reset Setup</button>
+    <button mat-raised-button color="accent" (click)="resetPage()">Reset</button>
   </mat-card>
 </mat-card>
 </div>
