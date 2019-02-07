@@ -3,21 +3,25 @@
   <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
 </head>
 <app-animation-page *ngIf="!gameReady"></app-animation-page>
-<div *ngIf="gameReady">
-  <button (click)="showAll()">Show All</button>
-  <div class="gameinfo">
-  <div class="gameinfos">Current Player Turn: {{currentPlayerIndex + 1}}</div>
-  <div class="gameinfos">Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
-  <div class="gameinfos">Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
-  </div>
-  <button *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)" (click)="viewStats()">View Stats</button>
-  <div class="playerinfos">
-  <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
-    <div>Player {{i+1}} Info</div>
-    <div>{{player}}</div>
-    <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
+<div class="mainInfoContainer" *ngIf="gameReady">
+  <mat-card class="gameinfo">
+    <div>
+      <div class="gameinfos">Current Player Turn: {{currentPlayerIndex + 1}}</div>
+      <div class="gameinfos">Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
+      <div class="gameinfos">Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
+    </div>
+    <div class="playerinfos">
+      <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
+        <div>Player {{i+1}} Info</div>
+        <div>{{player}}</div>
+        <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
+      </mat-card>
+    </div>
+    <div>
+      <button mat-raised-button color="primary" (click)="showAll()">Show All</button>
+      <button mat-raised-button color="primary" *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)" (click)="viewStats()">View Stats</button>
+    </div>
   </mat-card>
-  </div>
   <div class="mainmaincontainer">
     <div class="maincontainer" *ngIf="!(playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
       <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
