@@ -70,8 +70,14 @@ export class SetupPageComponent implements OnInit {
       this.playerInfoService.gameInfo.players.push(this.loginService.playerName);
     }
 
-    this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
-    this.largeMatches = this.playerInfoService.gameInfo.playerCount * 4;
+    if(this.playerInfoService.gameInfo.playerCount == 1) {
+      this.smallMatches = 4;
+      this.largeMatches = 8;
+    }
+    else {
+      this.smallMatches = this.playerInfoService.gameInfo.playerCount * 2;
+      this.largeMatches = this.playerInfoService.gameInfo.playerCount * 4;
+    }
 
     for(let i = 0; i < this.playerInfoService.gameInfo.playerCount; i++) {
       this.playerInfoService.gameInfo.playerScores[i] = 0;
@@ -90,5 +96,16 @@ export class SetupPageComponent implements OnInit {
     this.pokemonService.pokemonSelectedSet = null;
     this.playerInfoService.clearCurrentGame();
     this.router.navigate(['setupPage']);
+  }
+
+  setRounds() {
+    if(this.playerInfoService.gameInfo.playerCount == 1) {
+      if(this.playerInfoService.gameInfo.matchesCount == this.smallMatches) {
+        this.playerInfoService.gameInfo.roundCount = 8;
+      }
+      else {
+        this.playerInfoService.gameInfo.roundCount = 16;
+      }
+    }
   }
 }

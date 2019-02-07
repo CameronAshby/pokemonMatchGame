@@ -144,11 +144,17 @@ export class GamepageComponent implements OnInit {
   changeTurns() {
     this.playerInfoService.saveGameToFirebase();
 
+    if(this.playerInfoService.gameInfo.playerCount == 1) {
+      this.playerInfoService.gameInfo.roundCount -= 1;
+    }
+
     this.currentPlayerIndex += 1;
 
     if(this.currentPlayerIndex == this.playerInfoService.gameInfo.playerCount) {
       this.currentPlayerIndex = 0;
-      this.playerInfoService.gameInfo.roundCount += 1;
+      if(this.playerInfoService.gameInfo.playerCount != 1) {
+        this.playerInfoService.gameInfo.roundCount += 1;
+      }
     }
   }
 
