@@ -25,7 +25,7 @@
         </mat-select>
       </mat-form-field>
     </div>
-    <div class="infoContainer" *ngIf="playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players">
+    <div class="infoContainer" *ngIf="(playerInfoService.gameInfo.playerCount && playerInfoService.gameInfo.players) || playerInfoService.gameInfo.playerCount == 1">
       <div class="infoTitle">Card Set to Play With</div>
       <mat-select placeholder="Select Set to Play" [(ngModel)]="pokemonService.pokemonSelectedSet">
         <mat-option [value]="set" *ngFor="let set of pokemonService.pokemonSets">{{set.name}}</mat-option>

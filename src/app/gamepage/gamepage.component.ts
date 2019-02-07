@@ -72,7 +72,7 @@ export class GamepageComponent implements OnInit {
   }
 
   getRandomCard() {
-    this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount));
+    this.randomCardIndex = Math.floor((Math.random() * this.pokemonservice.pokemonSetCardCount-1));
   }
 
   checkDisable() {
