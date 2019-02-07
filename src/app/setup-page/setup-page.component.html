@@ -33,7 +33,7 @@
     </div>
     <div class="infoContainer" *ngIf="pokemonService.pokemonSelectedSet != null">
       <div class="infoTitle">Number of Matches To Be Found</div>
-      <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
+      <mat-select placeholder="Select Amount of Matches" (selectionChange)="pokemonService.setCardCount(); setRounds()" [(ngModel)]="playerInfoService.gameInfo.matchesCount">
         <mat-option [value]="smallMatches">Small: {{smallMatches}}</mat-option>
         <mat-option [value]="largeMatches">Large: {{largeMatches}}</mat-option>
       </mat-select>

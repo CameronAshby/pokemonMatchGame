@@ -10,7 +10,7 @@
   <div class="gameinfos">Matches Left: {{playerInfoService.gameInfo.matchesCount}}</div>
   <div class="gameinfos">Rounds Played: {{playerInfoService.gameInfo.roundCount}}</div>
   </div>
-  <button *ngIf="playerInfoService.gameInfo.matchesCount == 0" (click)="viewStats()">View Stats</button>
+  <button *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)" (click)="viewStats()">View Stats</button>
   <div class="playerinfos">
   <mat-card *ngFor="let player of playerInfoService.gameInfo.players; let i = index">
     <div>Player {{i+1}} Info</div>
@@ -18,7 +18,7 @@
     <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
   </mat-card>
   </div>
-  <div class="maincontainer">
+  <div class="maincontainer" *ngIf="!(playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
     <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
       <mat-card class="cards">
         <img [class.disabled]="disableClicking" [style.display]="cards.matched ? 'none' : 'flex'" (click)="checkDisable();toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">

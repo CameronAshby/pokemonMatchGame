@@ -97,4 +97,15 @@ export class SetupPageComponent implements OnInit {
     this.playerInfoService.clearCurrentGame();
     this.router.navigate(['setupPage']);
   }
+
+  setRounds() {
+    if(this.playerInfoService.gameInfo.playerCount == 1) {
+      if(this.playerInfoService.gameInfo.matchesCount == this.smallMatches) {
+        this.playerInfoService.gameInfo.roundCount = 8;
+      }
+      else {
+        this.playerInfoService.gameInfo.roundCount = 16;
+      }
+    }
+  }
 }
