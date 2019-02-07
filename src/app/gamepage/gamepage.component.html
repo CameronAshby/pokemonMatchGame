@@ -18,11 +18,13 @@
     <div>{{playerInfoService.gameInfo.playerScores[i]}}</div>
   </mat-card>
   </div>
-  <div class="maincontainer" *ngIf="!(playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
-    <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
-      <mat-card class="cards">
-        <img [class.disabled]="disableClicking" [style.display]="cards.matched ? 'none' : 'flex'" (click)="checkDisable();toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
-      </mat-card>
+  <div class="mainmaincontainer">
+    <div class="maincontainer" *ngIf="!(playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
+      <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
+        <mat-card class="cards">
+          <img [class.disabled]="disableClicking" [style.display]="cards.matched ? 'none' : 'flex'" (click)="checkDisable();toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
