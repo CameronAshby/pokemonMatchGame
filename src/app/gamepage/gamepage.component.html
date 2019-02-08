@@ -3,7 +3,7 @@
   <link href="https://fonts.googleapis.com/css?family=Merienda|Russo+One" rel="stylesheet">
 </head>
 <app-animation-page *ngIf="!gameReady"></app-animation-page>
-<div class="mainInfoContainer" *ngIf="gameReady">
+<div class="mainInfoContainer" *ngIf="gameReady" [ngStyle]="{'background-image': ((playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)) ? 'url(' + '../../assets/images/pokemonBackground4.jpg' + '' : 'none'}">
   <mat-card class="gameinfo">
     <div class="gameStatsContainer">
       <div class="gameinfos"><span class="infoText">Current Player Turn: </span> <span class="dataText">{{playerInfoService.gameInfo.players[currentPlayerIndex]}}</span></div>
@@ -23,7 +23,7 @@
   </mat-card>
   <div class="mainmaincontainer">
     <div class="maincontainer" *ngIf="!(playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
-      <div class="cardcontainer" *ngFor="let cards of cardsArray; let i = index">
+      <div class="cardcontainer" [ngStyle]="{'width': (playerInfoService.gameInfo.playerCount == 3) ? '15%' : '12%'}" *ngFor="let cards of cardsArray; let i = index">
         <mat-card class="cards">
           <img [class.disabled]="disableClicking" [style.display]="cards.matched ? 'none' : 'flex'" (click)="checkDisable();toggleClicked(i, cards)" class="cardImage" src="{{ cards.clicked ? cards.image : '../assets/images/cardBack.jpg'}}">
         </mat-card>
@@ -31,6 +31,6 @@
     </div>
   </div>
   <mat-card *ngIf="(playerInfoService.gameInfo.matchesCount == 0) || (playerInfoService.gameInfo.playerCount == 1 && playerInfoService.gameInfo.roundCount == 0)">
-    Game Over
+    <mat-card-title>Game Complete</mat-card-title>
   </mat-card>
 </div>
