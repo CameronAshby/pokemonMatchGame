@@ -6,7 +6,7 @@
 <div class="mainInfoContainer" *ngIf="gameReady">
   <mat-card class="gameinfo">
     <div class="gameStatsContainer">
-      <div class="gameinfos"><span class="infoText">Current Player Turn: </span> <span class="dataText">{{currentPlayerIndex + 1}}</span></div>
+      <div class="gameinfos"><span class="infoText">Current Player Turn: </span> <span class="dataText">{{playerInfoService.gameInfo.players[currentPlayerIndex]}}</span></div>
       <div class="gameinfos"><span class="infoText">Matches Left: </span> <span class="dataText">{{playerInfoService.gameInfo.matchesCount}}</span></div>
       <div class="gameinfos"><span class="infoText">Rounds {{playerInfoService.gameInfo.playerCount == 1 ? 'Left' : 'Played'}}: </span> <span class="dataText">{{playerInfoService.gameInfo.roundCount}}</span></div>
     </div>

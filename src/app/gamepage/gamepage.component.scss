@@ -90,8 +90,12 @@ $text-color: #5B6063;
 }
 
 
-.gameStatsContainer, .buttonContainer {
-  width: 23%;
+.gameStatsContainer {
+  width: 28%;
+}
+
+.buttonContainer {
+  width: 18%;
 }
 
 .playerinfos {
@@ -121,5 +125,13 @@ $text-color: #5B6063;
   }
   .gameStatsContainer, .playerinfos {
     margin-bottom: 10px;
+  }
+  .playerCard {
+    width: 30%;
+  }
+  .playerinfos {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: wrap;
   }
 }
