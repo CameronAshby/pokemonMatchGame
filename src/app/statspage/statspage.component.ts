@@ -25,6 +25,13 @@ export class StatspageComponent implements OnInit {
   async ngOnInit() {
     await this.afs.collection('players').doc(this.loginService.playerName).ref.onSnapshot(doc => {
       this.playerInfoService.playerInfo = doc.data() as Player;
+      this.cleanArrays();
     })
+  }
+
+  cleanArrays() {
+    for(let i = 0; i < this.playerInfoService.playerInfo.playersBeaten.length; i++) {
+
+    }
   }
 }
