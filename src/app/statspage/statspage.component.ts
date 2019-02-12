@@ -11,6 +11,10 @@ import {Router} from '@angular/router';
   styleUrls: ['./statspage.component.scss']
 })
 export class StatspageComponent implements OnInit {
+  beatenArray = [];
+  lostArray = [];
+
+  addBeaten: boolean = false;
 
   constructor(private afs: AngularFirestore,
               private loginService: LoginServiceService,
@@ -30,8 +34,37 @@ export class StatspageComponent implements OnInit {
   }
 
   cleanArrays() {
-    for(let i = 0; i < this.playerInfoService.playerInfo.playersBeaten.length; i++) {
+    let playerRepeatCount: number = 0;
 
-    }
+    this.playerInfoService.playerInfo.playersBeaten.forEach((player) => {
+      for(let x = 0; x < this.playerInfoService.playerInfo.playersBeaten.length; x++) {
+        if(player == this.playerInfoService.playerInfo.playersBeaten[x]) {
+          playerRepeatCount += 1;
+        }
+      }
+
+      this.beatenArray.forEach((beatenPlayer) => {
+        if((beatenPlayer.name != player)) {
+          this.addBeaten = true;
+        }
+      });
+
+      if(this.addBeaten  && !this.beatenArray.includes({name: player, timesBeaten: playerRepeatCount})) {
+        this.pushBeaten(player, playerRepeatCount);
+        this.addBeaten = false;
+      }
+
+      if(this.beatenArray.length == 0) {
+        this.beatenArray = ([{'name': player, 'timesBeaten': playerRepeatCount}]);
+      }
+
+      playerRepeatCount = 0;
+    });
+    console.log(this.beatenArray);
   }
+
+  pushBeaten(beatenPlayer, playerRepeatCount) {
+    this.beatenArray.push({name: beatenPlayer, timesBeaten: playerRepeatCount});
+  }
+
 }
