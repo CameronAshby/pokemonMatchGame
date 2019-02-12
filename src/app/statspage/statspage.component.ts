@@ -14,7 +14,7 @@ export class StatspageComponent implements OnInit {
   beatenArray = [];
   lostArray = [];
 
-  addBeaten: boolean = false;
+  foundDuplicate: boolean = false;
 
   constructor(private afs: AngularFirestore,
               private loginService: LoginServiceService,
@@ -34,37 +34,78 @@ export class StatspageComponent implements OnInit {
   }
 
   cleanArrays() {
+    this.cleanBeaten();
+    this.cleanLost();
+  }
+
+  cleanBeaten() {
     let playerRepeatCount: number = 0;
 
     this.playerInfoService.playerInfo.playersBeaten.forEach((player) => {
+      this.foundDuplicate = false;
+
       for(let x = 0; x < this.playerInfoService.playerInfo.playersBeaten.length; x++) {
         if(player == this.playerInfoService.playerInfo.playersBeaten[x]) {
           playerRepeatCount += 1;
         }
       }
 
-      this.beatenArray.forEach((beatenPlayer) => {
-        if((beatenPlayer.name != player)) {
-          this.addBeaten = true;
-        }
-      });
-
-      if(this.addBeaten  && !this.beatenArray.includes({name: player, timesBeaten: playerRepeatCount})) {
-        this.pushBeaten(player, playerRepeatCount);
-        this.addBeaten = false;
-      }
-
-      if(this.beatenArray.length == 0) {
+      if(!this.beatenArray) {
         this.beatenArray = ([{'name': player, 'timesBeaten': playerRepeatCount}]);
+      }
+      else {
+        for(let y = 0; y < this.beatenArray.length; y++) {
+          if(this.beatenArray[y].name == player) {
+            this.foundDuplicate = true;
+          }
+        }
+
+        if(!this.foundDuplicate) {
+          this.pushBeaten(player, playerRepeatCount);
+        }
       }
 
       playerRepeatCount = 0;
     });
-    console.log(this.beatenArray);
   }
 
   pushBeaten(beatenPlayer, playerRepeatCount) {
     this.beatenArray.push({name: beatenPlayer, timesBeaten: playerRepeatCount});
+  }
+
+  cleanLost() {
+    let playerRepeatCount: number = 0;
+
+    this.playerInfoService.playerInfo.playersLostTo.forEach((player) => {
+      this.foundDuplicate = false;
+
+      for(let x = 0; x < this.playerInfoService.playerInfo.playersLostTo.length; x++) {
+        if(player == this.playerInfoService.playerInfo.playersLostTo[x]) {
+          playerRepeatCount += 1;
+        }
+      }
+
+      if(!this.lostArray) {
+        this.lostArray = ([{'name': player, 'timesLostTo': playerRepeatCount}]);
+      }
+      else {
+        for(let y = 0; y < this.lostArray.length; y++) {
+          if(this.lostArray[y].name == player) {
+            this.foundDuplicate = true;
+          }
+        }
+
+        if(!this.foundDuplicate) {
+          this.pushLost(player, playerRepeatCount);
+        }
+      }
+
+      playerRepeatCount = 0;
+    });
+  }
+
+  pushLost(lostPlayer, playerRepeatCount) {
+    this.lostArray.push({name: lostPlayer, timesLostTo: playerRepeatCount})
   }
 
 }
