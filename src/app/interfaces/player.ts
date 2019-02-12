@@ -4,8 +4,8 @@ export interface Player {
   gamesPlayed: number;
   gamesWon: number;
   gamesTied: number;
-  playersBeaten: string[];
-  playersLostTo: string[];
+  playersBeaten: any[];
+  playersLostTo: any[];
   score: number;
   selected: boolean;
 }
